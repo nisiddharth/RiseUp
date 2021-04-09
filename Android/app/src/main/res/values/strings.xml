@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">RiseUp</string>
+    <string name="face_subscription_key">c88216ee9fc345e1b81e4611b273fdf9</string>
+    <string name="api_end_point">https://faceapimax.cognitiveservices.azure.com/face/v1.0</string>
+    <!-- Display strings -->
+
+
+    <string name="loading_message">Analyzing...</string>
+
+    <!-- Select image activity -->
+    <string name="select_an_image">Select an Image</string>
+    <string name="take_photo">Take a Photo</string>
+    <string name="select_image_in_album">From Gallery</string>
+    <string name="title_txt">This will find a Spotify playlist to best fit your current mood. </string>
+    <string name="take_pic">Take Picture</string>
+    <string name="title_activity_result">ResultActivity</string>
+    <string name="result_title_chart">Top 4 Emotions</string>
+    <string name="result_title_playlist">Playlist for top emotion: %1$s </string>
+    <string name="happy_playlist_url">https://open.spotify.com/user/maxkernchen/playlist/3vScrksSS6JMrujlrjEDlR</string>
+    <string name="angry_playlist_url">https://open.spotify.com/user/maxkernchen/playlist/6Xtv1cTJLUXXki6P36114k</string>
+    <string name="netural_playlist_url">https://open.spotify.com/user/maxkernchen/playlist/2jnf7oEDRcmK3Q3V5QadPE</string>
+    <string name="suprise_playlist_url">https://open.spotify.com/user/maxkernchen/playlist/2UMnopIpCrUSesA3FpdgQD</string>
+    <string name="sad_playlist_url">https://open.spotify.com/user/maxkernchen/playlist/08BqCXVsgzd7hGTxLnMGnc</string>
+    <string name="consent_warning">Before using this application make sure you understand the consent rules in the description</string>
+    <string name="image_processing_error">Couldn\'t get image from camera, please try again</string>
+    <string name="no_internet">Internet connection is required to detect emotions, please check your network settings</string>
+    <string name="no_faces">"We couldn't find any mood, make sure your face is completely in the picture"</string>
+    <string name="null_result_bundles">Bundles were null coming from EmotionDetectActivity</string>
+    <string name="title_activity_failed_image_view">FailedImageView</string>
 </resources>

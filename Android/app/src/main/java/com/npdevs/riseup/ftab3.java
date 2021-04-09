@@ -1,12 +1,16 @@
 package com.npdevs.riseup;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.npdevs.riseup.helper.FailedImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +27,8 @@ public class ftab3 extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private CardView musicCardView;
 
     public ftab3() {
         // Required empty public constructor
@@ -59,6 +65,18 @@ public class ftab3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ftab3, container, false);
+        View view = inflater.inflate(R.layout.fragment_ftab3, container, false);
+
+        musicCardView = view.findViewById(R.id.music);
+        musicCardView.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), EmotionDetectActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        return view;
     }
 }
