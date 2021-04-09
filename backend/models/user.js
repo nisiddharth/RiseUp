@@ -19,6 +19,9 @@ const UserSchema = new mongoose.Schema({
             type: String,
         }
     ],
+    emotion: {
+        type: mongoose.Types.ObjectId,
+    },
     encryptedPassword: String,
     salt: String,
 }, {

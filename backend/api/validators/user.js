@@ -13,3 +13,17 @@ exports.saveDeviceTokenValidator = [
         next();
     }
 ]
+
+exports.saveEmotionValidator = [
+    check('emotions').isArray().exists(),
+    (req, res, next) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({
+                status: 0,
+                error: errors.array(),
+            });
+        }
+        next();
+    }
+]
