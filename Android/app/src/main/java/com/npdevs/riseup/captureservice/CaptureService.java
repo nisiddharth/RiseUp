@@ -19,6 +19,7 @@ import com.npdevs.riseup.R;
 public class CaptureService extends Service {
 
     final private String CHANNEL_ID = "ForegroundServiceChannel";
+    private BroadcastReceiver br;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -47,12 +48,18 @@ public class CaptureService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        BroadcastReceiver br = new UnlockReceiver();
+        br = new UnlockReceiver();
         IntentFilter filter = new IntentFilter(Intent.ACTION_USER_PRESENT);
         filter.addAction(Intent.ACTION_SCREEN_ON);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             filter.addAction(Intent.ACTION_USER_UNLOCKED);
         this.registerReceiver(br, filter);
+    }
+
+    @Override
+    public void onDestroy() {
+        this.unregisterReceiver(br);
+        super.onDestroy();
     }
 
     @Override
