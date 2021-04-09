@@ -61,6 +61,6 @@ public class SummaryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ftab1, container, false);
+        return inflater.inflate(R.layout.fragment_summary, container, false);
     }
 }
