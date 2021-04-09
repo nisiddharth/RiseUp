@@ -1,4 +1,4 @@
-package com.npdevs.riseup;
+package com.npdevs.riseup.emotion;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,6 +24,7 @@ import com.microsoft.projectoxford.face.FaceServiceRestClient;
 import com.microsoft.projectoxford.face.contract.Emotion;
 import com.microsoft.projectoxford.face.contract.Face;
 import com.microsoft.projectoxford.face.rest.ClientException;
+import com.npdevs.riseup.R;
 import com.npdevs.riseup.helper.CameraHelperActivity;
 import com.npdevs.riseup.helper.EmotionData;
 import com.npdevs.riseup.helper.FailedImageView;

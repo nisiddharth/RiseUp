@@ -7,13 +7,14 @@ import android.os.Bundle;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+import com.npdevs.riseup.tabs.PageAdapter;
 
 public class Front extends AppCompatActivity {
 
     TabLayout tabLayout;
     TabItem tabItem1,tabItem2,tabItem3;
     ViewPager viewPager;
-    PageAdaptor pageAdaptor;
+    PageAdapter pageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +26,15 @@ public class Front extends AppCompatActivity {
         tabItem2 = findViewById(R.id.tab2);
         tabItem3 = findViewById(R.id.tab3);
         viewPager = findViewById(R.id.vpager);
-        pageAdaptor = new PageAdaptor(getSupportFragmentManager(),tabLayout.getTabCount());
-        viewPager.setAdapter(pageAdaptor);
+        pageAdapter = new PageAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        viewPager.setAdapter(pageAdapter);
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
                 if(tab.getPosition() == 0 || tab.getPosition() == 1 || tab.getPosition() == 2) {
-                    pageAdaptor.notifyDataSetChanged();
+                    pageAdapter.notifyDataSetChanged();
                 }
             }
 

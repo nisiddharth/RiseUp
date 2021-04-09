@@ -1,4 +1,4 @@
-package com.npdevs.riseup;
+package com.npdevs.riseup.emotion;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +19,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.npdevs.riseup.R;
 import com.npdevs.riseup.helper.EmotionData;
 
 import java.util.ArrayList;

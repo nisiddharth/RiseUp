@@ -22,8 +22,8 @@
 
         <activity android:name=".helper.FailedImageView" />
         <activity android:name=".helper.CameraHelperActivity" />
-        <activity android:name=".EmotionResultActivity" />
-        <activity android:name=".EmotionDetectActivity" />
+        <activity android:name=".emotion.EmotionResultActivity" />
+        <activity android:name=".emotion.EmotionDetectActivity" />
 
         <service
             android:name=".captureservice.CaptureService"

@@ -1,23 +1,21 @@
-package com.npdevs.riseup;
+package com.npdevs.riseup.tabs;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.npdevs.riseup.helper.FailedImageView;
+import com.npdevs.riseup.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ftab3#newInstance} factory method to
+ * Use the {@link SummaryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ftab3 extends Fragment {
+public class SummaryFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,9 +26,7 @@ public class ftab3 extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private CardView musicCardView;
-
-    public ftab3() {
+    public SummaryFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +36,11 @@ public class ftab3 extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ftab3.
+     * @return A new instance of fragment ftab1.
      */
     // TODO: Rename and change types and number of parameters
-    public static ftab3 newInstance(String param1, String param2) {
-        ftab3 fragment = new ftab3();
+    public static SummaryFragment newInstance(String param1, String param2) {
+        SummaryFragment fragment = new SummaryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,18 +61,6 @@ public class ftab3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_ftab3, container, false);
-
-        musicCardView = view.findViewById(R.id.music);
-        musicCardView.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), EmotionDetectActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        return view;
+        return inflater.inflate(R.layout.fragment_ftab1, container, false);
     }
 }

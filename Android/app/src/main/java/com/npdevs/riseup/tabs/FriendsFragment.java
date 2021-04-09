@@ -1,4 +1,4 @@
-package com.npdevs.riseup;
+package com.npdevs.riseup.tabs;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.npdevs.riseup.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ftab2#newInstance} factory method to
+ * Use the {@link FriendsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ftab2 extends Fragment {
+public class FriendsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class ftab2 extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ftab2() {
+    public FriendsFragment() {
         // Required empty public constructor
     }
 
@@ -37,8 +39,8 @@ public class ftab2 extends Fragment {
      * @return A new instance of fragment ftab2.
      */
     // TODO: Rename and change types and number of parameters
-    public static ftab2 newInstance(String param1, String param2) {
-        ftab2 fragment = new ftab2();
+    public static FriendsFragment newInstance(String param1, String param2) {
+        FriendsFragment fragment = new FriendsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
