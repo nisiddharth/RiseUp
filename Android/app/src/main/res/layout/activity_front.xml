@@ -18,7 +18,37 @@
 
         <com.google.android.material.tabs.TabLayout
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"/>
+            android:layout_width="match_parent"
+            android:id="@+id/tablayout1"
+            android:background="@color/colorPrimary"
+            app:tabTextColor="@color/black"
+            app:tabSelectedTextColor="@color/white"
+            app:tabIndicatorColor="@color/white">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tab1"
+                android:text="Summary"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tab2"
+                android:text="Friends"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tab3"
+                android:text="Play"/>
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/vpager"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
