@@ -1,10 +1,15 @@
 package com.npdevs.riseup.tabs;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -14,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -27,66 +33,75 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
+import com.google.gson.Gson;
 import com.npdevs.riseup.R;
+import com.npdevs.riseup.api.responseModels.user.GetEmotionResponse;
+import com.npdevs.riseup.api.retrofit.RetrofitClient;
+import com.npdevs.riseup.utils.SharedPrefs;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SummaryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SummaryFragment extends Fragment implements OnChartValueSelectedListener {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public SummaryFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ftab1.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SummaryFragment newInstance(String param1, String param2) {
-        SummaryFragment fragment = new SummaryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private SharedPrefs prefs;
+    private PieChart chart;
+    private List<List<String>> emotions;
+    private Context context;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_summary, container, false);
-        PieChart chart = view.findViewById(R.id.chart1);
+        chart = view.findViewById(R.id.chart1);
+        swipeRefreshLayout = view.findViewById(R.id.swipe_to_refresh);
+        context = getContext();
+        prefs = new SharedPrefs(context);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadData();
+            }
+        });
+        loadData();
+        return view;
+    }
+
+    private void onLoadStart(){
+        swipeRefreshLayout.setRefreshing(true);
+    }
+    private void onLoadEnd(){
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    private void loadData() {
+        onLoadStart();
+        RetrofitClient.getClient().getEmotion(prefs.getToken()).enqueue(new Callback<GetEmotionResponse>() {
+            @Override
+            public void onResponse(Call<GetEmotionResponse> call, Response<GetEmotionResponse> response) {
+                onLoadEnd();
+                if (!response.isSuccessful()) {
+                    Gson gson = new Gson();
+                    com.npdevs.riseup.api.responseModels.Response errorResponse = gson.fromJson(response.errorBody().charStream(), com.npdevs.riseup.api.responseModels.Response.class);
+                    Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                emotions = response.body().getData();
+                setChart();
+            }
+
+            @Override
+            public void onFailure(Call<GetEmotionResponse> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setChart() {
         chart.setUsePercentValues(true);
         chart.getDescription().setEnabled(false);
         chart.setExtraOffsets(5, 10, 5, 5);
@@ -132,9 +147,7 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
         // entry label styling
         chart.setEntryLabelColor(Color.WHITE);
         chart.setEntryLabelTextSize(12f);
-        List<List<String>> emotions = new ArrayList<>();
         setData(chart, emotions);
-        return view;
     }
 
     @Override
@@ -161,14 +174,14 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
     private void setData(PieChart chart, List<List<String>> emotions) {
         int count = 7;
         HashMap<String, Integer> map = new HashMap<>();
-        for(List<String> emo : emotions) {
+        for (List<String> emo : emotions) {
             map.put(emo.get(1), 1 + map.getOrDefault(emo.get(1), 0));
         }
         ArrayList<PieEntry> entries = new ArrayList<>();
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
-        for(Map.Entry<String, Integer> entry : map.entrySet()) {
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
             entries.add(new PieEntry(entry.getValue(), entry.getKey()));
         }
 
@@ -209,10 +222,8 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
         data.setValueTextSize(11f);
         data.setValueTextColor(Color.WHITE);
         chart.setData(data);
-
         // undo all highlights
         chart.highlightValues(null);
-
         chart.invalidate();
     }
 }
