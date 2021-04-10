@@ -85,6 +85,7 @@ public class VideosActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             YoutubeVideo video = data.get(position);
+            getLifecycle().addObserver(holder.youTubePlayerView);
             holder.youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
                 @Override
                 public void onReady(YouTubePlayer youTubePlayer) {
@@ -111,5 +112,11 @@ public class VideosActivity extends AppCompatActivity {
                 title = binding.title;
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 }

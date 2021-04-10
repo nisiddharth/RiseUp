@@ -18,6 +18,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface APIInterface {
 
@@ -39,7 +40,10 @@ public interface APIInterface {
     Call<SaveEmotionResponse> saveEmotion(@Header("Authorization") String token, @Body Map<String, List<List<String>>> body);
 
     @GET("user/get/emotion")
-    Call<GetEmotionResponse> getEmotion();
+    Call<GetEmotionResponse> getEmotion(@Header("Authorization") String token);
+
+    @GET("friend/get/emotions")
+    Call<GetEmotionResponse> getFriendEmotion(@Query("friend_id") String friendId);
 
     @POST("user/add/friend")
     Call<Response> addFriend(@Header("Authorization") String token, @Body Map<String, String> body);
