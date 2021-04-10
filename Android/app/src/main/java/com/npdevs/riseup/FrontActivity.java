@@ -1,41 +1,22 @@
 package com.npdevs.riseup;
 
-import androidx.annotation.NonNull;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Environment;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.npdevs.riseup.activity.AddActivity;
 import com.npdevs.riseup.activity.RequestActivity;
-import com.npdevs.riseup.api.responseModels.user.SaveTokenResponse;
-import com.npdevs.riseup.api.retrofit.RetrofitClient;
 import com.npdevs.riseup.tabs.PageAdapter;
-import com.npdevs.riseup.utils.PermissionCtrl;
 import com.npdevs.riseup.utils.SessionCtrl;
-import com.npdevs.riseup.utils.SharedPrefs;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class FrontActivity extends AppCompatActivity {
 

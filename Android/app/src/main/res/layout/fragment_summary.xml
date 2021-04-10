@@ -1,17 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".tabs.SummaryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/heading1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Fragment1"
-        android:gravity="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="30dp"/>
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginVertical="10dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:text="Today's summary" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/summarytext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginVertical="10dp"
+        android:layout_below="@id/heading1"
+        android:textColor="@color/dark_green"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:text="You are doing good" />
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart1"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_below="@+id/summarytext" />
+
+
+</RelativeLayout>

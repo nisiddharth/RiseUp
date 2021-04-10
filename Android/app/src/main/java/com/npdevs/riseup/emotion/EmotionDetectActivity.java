@@ -28,6 +28,7 @@ import com.microsoft.projectoxford.face.contract.Face;
 import com.microsoft.projectoxford.face.rest.ClientException;
 import com.npdevs.riseup.R;
 import com.npdevs.riseup.activity.ActivityActivity;
+import com.npdevs.riseup.activity.VideosActivity;
 import com.npdevs.riseup.books.BookActivity;
 import com.npdevs.riseup.helper.CameraHelperActivity;
 import com.npdevs.riseup.helper.EmotionData;
@@ -172,6 +173,9 @@ public class EmotionDetectActivity extends AppCompatActivity {
         }
         else if(name.equals("book")){
             toResults = new Intent(EmotionDetectActivity.this, BookActivity.class);
+        }
+        else if(name.equals("video")) {
+            toResults = new Intent(EmotionDetectActivity.this, VideosActivity.class);
         }
         else {
             toResults = new Intent(EmotionDetectActivity.this, ActivityActivity.class);
