@@ -26,6 +26,13 @@ Official repo of team NP Devs for Hack36 4.0
   6) Youtube API
   7) Spotify API
   8) Okhttp3 logging interceptor
+
+  Tools Used:
+  1) Android Studio
+  2) Postman
+
+  Component Used:
+  1) Google Material Design Library
   
 
 ## Contributors:
