@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.npdevs.riseup.R;
 import com.npdevs.riseup.activity.ActivityActivity;
+import com.npdevs.riseup.activity.VideosActivity;
 import com.npdevs.riseup.books.BookActivity;
 import com.npdevs.riseup.emotion.EmotionDetectActivity;
 import com.npdevs.riseup.emotion.EmotionResultActivity;
@@ -20,57 +21,12 @@ import com.npdevs.riseup.helper.EmotionData;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SuggestionsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SuggestionsFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private CardView musicCardView;
     private CardView booksCardView;
     private CardView activitiesCardView;
-
-    public SuggestionsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ftab3.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SuggestionsFragment newInstance(String param1, String param2) {
-        SuggestionsFragment fragment = new SuggestionsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private CardView videoCardView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,6 +35,7 @@ public class SuggestionsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_suggestions, container, false);
 
         musicCardView = view.findViewById(R.id.music);
+        videoCardView = view.findViewById(R.id.video);
         musicCardView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -147,6 +104,16 @@ public class SuggestionsFragment extends Fragment {
                 startActivity(toResults);
             }
         });
+
+        videoCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), VideosActivity.class);
+                startActivity(i);
+            }
+        });
+
+
 
         return view;
     }
