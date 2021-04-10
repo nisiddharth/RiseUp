@@ -168,7 +168,7 @@ exports.addFriend = async (req, res) => {
                 message: "Entered your own cred!",
             })
         }
-        if (user.requests.includes(friend._id))
+        if (friend.requests.includes(friend._id))
             return res.status(422).json({
                 status: 0,
                 message: "Request already sent!",
