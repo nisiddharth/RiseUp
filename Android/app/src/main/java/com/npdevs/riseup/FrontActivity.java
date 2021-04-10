@@ -1,5 +1,6 @@
 package com.npdevs.riseup;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -13,7 +14,7 @@ import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.npdevs.riseup.tabs.PageAdapter;
 
-public class Front extends AppCompatActivity {
+public class FrontActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     TabItem tabItem1,tabItem2,tabItem3;
@@ -24,6 +25,9 @@ public class Front extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_front);
+
+        ActionBar toolbar = getSupportActionBar();
+        toolbar.setElevation(0);
 
         tabLayout = findViewById(R.id.tablayout1);
         tabItem1 = findViewById(R.id.tab1);

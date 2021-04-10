@@ -94,6 +94,7 @@
             android:layout_rowWeight="1"
             android:layout_column="0"
             android:layout_row="1"
+            android:id="@+id/books"
             android:layout_margin="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">

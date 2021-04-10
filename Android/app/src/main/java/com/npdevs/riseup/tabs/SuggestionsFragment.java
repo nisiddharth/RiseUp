@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.npdevs.riseup.R;
+import com.npdevs.riseup.books.BookActivity;
 import com.npdevs.riseup.emotion.EmotionDetectActivity;
 import com.npdevs.riseup.emotion.EmotionResultActivity;
 import com.npdevs.riseup.helper.EmotionData;
@@ -36,6 +37,7 @@ public class SuggestionsFragment extends Fragment {
     private String mParam2;
 
     private CardView musicCardView;
+    private CardView booksCardView;
 
     public SuggestionsFragment() {
         // Required empty public constructor
@@ -96,6 +98,15 @@ public class SuggestionsFragment extends Fragment {
                     toResults.putExtra("emotionResultsBundle", bundleToEmotionResults);
                     startActivity(toResults);
                 }
+            }
+        });
+
+        booksCardView = view.findViewById(R.id.books);
+        booksCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), BookActivity.class);
+                startActivity(intent);
             }
         });
 
