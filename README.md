@@ -9,10 +9,23 @@ Official repo of team NP Devs for Hack36 4.0
   
 ## Table of Contents:
 
+
 ## Technology Stack:
-  1) Node.Js
-  2) MongoDB
-  3) Java Android
+  1) Android SDK
+  2) Java Programming Language
+  3) Node.js
+  4) MongoDB
+  5) SQLite
+
+  API Used:
+  1) Tensorflow android API
+  2) Hidden Camera API
+  3) Microsoft projectoxford face API
+  4) PhilJay MPAndroidChart API
+  5) Retrofit API
+  6) Youtube API
+  7) Spotify API
+  8) Okhttp3 logging interceptor
   
 
 ## Contributors:
