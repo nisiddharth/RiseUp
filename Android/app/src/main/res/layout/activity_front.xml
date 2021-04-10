@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:id="@+id/tablayout1"
             android:background="@color/colorPrimary"
-            app:tabTextColor="@color/black"
+            app:tabTextColor="@color/grey"
             app:tabSelectedTextColor="@color/white"
             app:tabIndicatorColor="@color/white">
 
