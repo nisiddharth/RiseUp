@@ -41,10 +41,10 @@ exports.signIn = async (req, res) => {
 
 exports.signUp = async (req, res) => {
     const { body } = req;
-    const { email } = body;
+    const { email, phone } = body;
     try {
 
-        const userExists = await User.exists({ email });
+        const userExists = await User.exists({ $or: [{ email }, { phone }] });
         if (userExists)
             return res.status(401).json({
                 status: 0,

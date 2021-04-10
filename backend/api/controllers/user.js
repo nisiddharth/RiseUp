@@ -76,3 +76,64 @@ exports.getEmotions = async (req, res) => {
         })
     }
 }
+
+exports.addFriend = async (req, res) => {
+    const { email, phone } = req.body;
+    const { _id } = req.auth;
+    try {
+        let friend = await User.findOne({ $or: [{ email }, { phone }] });
+
+        if (!friend) {
+            return res.status(404).json({
+                status: 0,
+                message: "User not found!",
+            });
+        }
+        if (_id == friend._id) {
+            return res.status(422).json({
+                status: 0,
+                message: "Entered your own cred!"
+            })
+        }
+
+        await User.findOneAndUpdate({ _id }, { $push: { friends: friend._id } });
+        await User.findOneAndUpdate({ _id: friend._id }, { $push: { friends: _id } });
+
+        return res.json({
+            status: 1,
+            message: "Friend added successfully!",
+        })
+
+    } catch (err) {
+        console.log("Get Emotion Error", err);
+        return res.status(500).json({
+            status: 0,
+            message: "Something went wrong!",
+        })
+    }
+}
+
+exports.getFriends = async (req, res) => {
+    const { _id } = req.auth;
+    try {
+        const user = await User.findOne({ _id });
+
+        let friends = [];
+        for (let friendId of user.friends) {
+            const friend = await User.findOne({ _id: friendId });
+            friends.push(friend.getMeta());
+        }
+
+        return res.json({
+            status: 1,
+            data: friends,
+        });
+
+    } catch (err) {
+        console.log("Get Emotion Error", err);
+        return res.status(500).json({
+            status: 0,
+            message: "Something went wrong!",
+        })
+    }
+}

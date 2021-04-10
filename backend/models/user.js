@@ -24,7 +24,14 @@ const UserSchema = new mongoose.Schema({
     ],
     emotion: {
         type: mongoose.Types.ObjectId,
+        ref: 'emotions'
     },
+    friends: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'user',
+        }
+    ],
     encryptedPassword: String,
     salt: String,
 }, {
@@ -43,6 +50,7 @@ UserSchema.virtual('password').set(function (password) {
     this.encryptedPassword = this.securePassword(password);
 });
 
+
 UserSchema.methods = {
     authenticate: function (plainPassword) {
         return this.securePassword(plainPassword) === this.encryptedPassword
@@ -56,6 +64,13 @@ UserSchema.methods = {
                 .digest('hex');
         } catch (err) {
             return "";
+        }
+    },
+    getMeta: function () {
+        return {
+            name: this.name,
+            phone: this.phone,
+            email: this.email,
         }
     }
 }
