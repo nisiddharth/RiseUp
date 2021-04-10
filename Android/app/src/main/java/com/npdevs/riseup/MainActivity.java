@@ -3,6 +3,7 @@ package com.npdevs.riseup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.npdevs.riseup.utils.SharedPrefs;
@@ -16,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         prefs = new SharedPrefs(this);
+        SharedPreferences sharedPreferences = getSharedPreferences("EmotionData", MODE_PRIVATE);
+        sharedPreferences.edit().clear().commit();
 
         //Checking if token exists or not
         if (prefs.isSignedIn()) {
@@ -25,5 +28,6 @@ public class MainActivity extends AppCompatActivity {
             intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
+        finish();
     }
 }
