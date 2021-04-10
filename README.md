@@ -5,7 +5,7 @@ Official repo of team NP Devs for Hack36 4.0
 
 
 ## Introduction:
-This is a self care app that primarily focusses on reducing the stress levels of the user. This app identifies the mood of the user and suggests relative measures in the form of music, videos, books and hobbies to calm down the user and also prompts the trusted contacts in times of distress. This app shall be beneficial for people with depression, anxiety and panic attacks since it also offers access to registered medical peofessionals when user needs one.
+This is a self care app that primarily focusses on reducing the stress levels of the user. This app identifies the mood of the user and suggests relative measures in the form of music, videos, books and hobbies to calm down the user and also prompts the trusted contacts in times of distress. This app shall be beneficial for people with depression, anxiety and panic attacks since it also offers access to registered medical professionals when user needs one.
   
 ## Table of Contents:
   The main features of the app are:
