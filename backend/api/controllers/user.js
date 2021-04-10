@@ -71,7 +71,13 @@ exports.saveEmotion = async (req, res) => {
 
 exports.getEmotions = async (req, res) => {
     const { _id } = req.auth;
+    const { prev_day } = req.query;
     try {
+        let pastDay = new Date();
+        pastDay.setDate(pastDay.getDate() - parseInt(prev_day) - 1);
+        let presentDay = new Date();
+        presentDay.setDate(presentDay.getDate() - parseInt(prev_day));
+
         const user = await User.findOne({ _id });
         if (!user.emotion) {
             return res.status(404).json({
@@ -82,9 +88,19 @@ exports.getEmotions = async (req, res) => {
 
         const emotion = await Emotion.findOne({ _id: user.emotion });
 
+        let data = [];
+        let allData = emotion.data.reverse();
+        for (let item of allData) {
+            console.log("Item", item);
+            if (parseInt(item[0]) < pastDay.getTime())
+                break;
+            if (parseInt(item[0]) <= presentDay.getTime())
+                data.push(item);
+        }
+
         return res.json({
             status: 1,
-            data: emotion.data,
+            data,
         })
     } catch (err) {
         console.log("Get Emotion Error", err);

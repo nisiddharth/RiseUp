@@ -3,5 +3,5 @@ const { startMonitor } = require('../jobs/emotionMonitor')
 
 module.exports = () => {
     startMonitor();
-    scheduler.scheduleJob('/2 * * * *', startMonitor);
+    scheduler.scheduleJob('/1 * * * *', startMonitor);
 }

@@ -40,10 +40,10 @@ public interface APIInterface {
     Call<SaveEmotionResponse> saveEmotion(@Header("Authorization") String token, @Body Map<String, List<List<String>>> body);
 
     @GET("user/get/emotion")
-    Call<GetEmotionResponse> getEmotion(@Header("Authorization") String token);
+    Call<GetEmotionResponse> getEmotion(@Header("Authorization") String token, @Query("prev_day") int offset);
 
     @GET("friend/get/emotions")
-    Call<GetEmotionResponse> getFriendEmotion(@Query("friend_id") String friendId);
+    Call<GetEmotionResponse> getFriendEmotion(@Query("friend_id") String friendId, @Query("prev_day") int offset);
 
     @POST("user/add/friend")
     Call<Response> addFriend(@Header("Authorization") String token, @Body Map<String, String> body);

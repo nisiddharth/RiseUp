@@ -9,13 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <RelativeLayout
+        android:layout_marginHorizontal="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".tabs.SummaryFragment">
 
         <TextView
-            android:id="@+id/heading1"
+            android:id="@+id/heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
@@ -30,7 +31,7 @@
             android:id="@+id/summarytext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/heading1"
+            android:layout_below="@id/heading"
             android:layout_marginVertical="10dp"
             android:layout_weight="1"
             android:text="You are doing good!"
@@ -74,17 +75,23 @@
             android:id="@+id/switches"
             android:layout_below="@id/headingpast">
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/backdate"
+                android:id="@+id/previous_date"
                 android:text="← Previous" />
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:id="@+id/datedate"
+                android:id="@+id/date"
                 android:textColor="@color/black"
                 android:textAlignment="center"
                 android:text="Date" />
+            <Button
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/next_date"
+                android:text="Next ➝" />
         </LinearLayout>
 
         <TextView
@@ -98,12 +105,6 @@
             android:textAlignment="center"
             android:textColor="@color/dark_green"
             android:textStyle="bold" />
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/chartpast"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_below="@+id/summarytextpast" />
 
     </RelativeLayout>
     </ScrollView>

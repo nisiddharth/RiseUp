@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,9 +41,13 @@ import com.npdevs.riseup.R;
 import com.npdevs.riseup.SymptomsActivity;
 import com.npdevs.riseup.api.responseModels.user.GetEmotionResponse;
 import com.npdevs.riseup.api.retrofit.RetrofitClient;
+import com.npdevs.riseup.databinding.FragmentSummaryBinding;
 import com.npdevs.riseup.utils.SharedPrefs;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,47 +58,79 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
     private List<List<String>> emotions;
     private Context context;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private FragmentSummaryBinding binding;
+    private int offset = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_summary, container, false);
-        chart = view.findViewById(R.id.chart1);
-        swipeRefreshLayout = view.findViewById(R.id.swipe_to_refresh);
+        binding = FragmentSummaryBinding.inflate(getLayoutInflater(), container, false);
+        chart = binding.chart1;
         context = getContext();
         prefs = new SharedPrefs(context);
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        binding.swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadData(view);
+                loadData();
             }
         });
-        loadData(view);
+        loadData();
 
-        TextView messageTap = view.findViewById(R.id.messageTap);
+        TextView messageTap = binding.messageTap;
         messageTap.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), SymptomsActivity.class);
             startActivity(intent);
         });
 
-        return view;
+        setDateNav();
+        return binding.getRoot();
     }
 
-    private void onLoadStart(){
-        swipeRefreshLayout.setRefreshing(true);
-    }
-    private void onLoadEnd(){
-        swipeRefreshLayout.setRefreshing(false);
+    private void setDateNav() {
+        binding.previousDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                offset++;
+                loadData();
+            }
+        });
+
+        binding.nextDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (offset == 0)
+                    return;
+                offset--;
+                loadData();
+            }
+        });
     }
 
-    private void loadData(View view) {
-        TextView summary = view.findViewById(R.id.summarytext);
+    private void onLoadStart() {
+        binding.swipeToRefresh.setRefreshing(true);
+    }
+
+    private void onLoadEnd() {
+        binding.swipeToRefresh.setRefreshing(false);
+    }
+
+    private String getDateFormat() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1 * offset);
+        Date date = cal.getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return dateFormat.format(date);
+    }
+
+    private void loadData() {
+        binding.date.setText(getDateFormat());
+        TextView summary = binding.summarytext;
         summary.setText("You doing good!");
         summary.setTextColor(getResources().getColor(R.color.dark_green));
         onLoadStart();
-        RetrofitClient.getClient().getEmotion(prefs.getToken()).enqueue(new Callback<GetEmotionResponse>() {
+        RetrofitClient.getClient().getEmotion(prefs.getToken(), offset).enqueue(new Callback<GetEmotionResponse>() {
             @Override
             public void onResponse(Call<GetEmotionResponse> call, Response<GetEmotionResponse> response) {
                 onLoadEnd();
@@ -104,7 +141,7 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
                     return;
                 }
                 emotions = response.body().getData();
-                setChart(view);
+                setChart();
             }
 
             @Override
@@ -114,7 +151,7 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
         });
     }
 
-    private void setChart(View view) {
+    private void setChart() {
         chart.setUsePercentValues(true);
         chart.getDescription().setEnabled(false);
         chart.setExtraOffsets(5, 10, 5, 5);
@@ -160,7 +197,7 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
         // entry label styling
         chart.setEntryLabelColor(Color.WHITE);
         chart.setEntryLabelTextSize(12f);
-        setData(view, chart, emotions);
+        setData(chart, emotions);
     }
 
     @Override
@@ -184,7 +221,7 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
         return s;
     }
 
-    private void setData(View view, PieChart chart, List<List<String>> emotions) {
+    private void setData(PieChart chart, List<List<String>> emotions) {
         HashMap<String, Integer> map = new HashMap<>();
         for (List<String> emo : emotions) {
             map.put(emo.get(1), 1 + map.getOrDefault(emo.get(1), 0));
@@ -197,11 +234,11 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             entries.add(new PieEntry(entry.getValue(), entry.getKey()));
             String label = entry.getKey();
-            if(label.equalsIgnoreCase("Fear") || label.equalsIgnoreCase("Sad") || label.equalsIgnoreCase("Angry"))
+            if (label.equalsIgnoreCase("Fear") || label.equalsIgnoreCase("Sad") || label.equalsIgnoreCase("Angry"))
                 ++neg;
             ++total;
-            if(neg >= 0.75 * total) {
-                TextView summary = view.findViewById(R.id.summarytext);
+            if (neg >= 0.75 * total) {
+                TextView summary = binding.summarytext;
                 summary.setText("You are on the sad side.");
                 summary.setTextColor(getResources().getColor(R.color.light_red));
             }

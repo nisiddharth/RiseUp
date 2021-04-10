@@ -118,7 +118,8 @@ public class FriendsFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(getActivity(), ProfileActivity.class);
-                        intent.putExtra("user_id",samples.get(getAdapterPosition()).getId());
+                        intent.putExtra("id",samples.get(getAdapterPosition()).getId());
+                        intent.putExtra("name", samples.get(getAdapterPosition()).getName());
                         startActivity(intent);
                         getActivity().finish();
                     }
