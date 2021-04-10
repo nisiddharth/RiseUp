@@ -32,6 +32,8 @@ android {
     }
 }
 
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 dependencies {
     implementation 'com.cottacush:HiddenCamera:0.0.2'
     implementation 'org.tensorflow:tensorflow-android:+'
@@ -55,6 +57,12 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
     //okhttp3
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+
+    //firebase
+
+    implementation platform('com.google.firebase:firebase-bom:27.0.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-messaging:20.1.5'
 
 
 }
