@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.npdevs.riseup.tabs.PageAdapter;
+import com.npdevs.riseup.utils.PermissionCtrl;
 
 public class FrontActivity extends AppCompatActivity {
 
@@ -91,5 +92,11 @@ public class FrontActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        new PermissionCtrl(this).askAllPermissions();
     }
 }
