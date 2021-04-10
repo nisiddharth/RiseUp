@@ -1,6 +1,7 @@
 package com.npdevs.riseup.tabs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -35,6 +37,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.google.gson.Gson;
 import com.npdevs.riseup.R;
+import com.npdevs.riseup.SymptomsActivity;
 import com.npdevs.riseup.api.responseModels.user.GetEmotionResponse;
 import com.npdevs.riseup.api.retrofit.RetrofitClient;
 import com.npdevs.riseup.utils.SharedPrefs;
@@ -64,10 +67,17 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadData();
+                loadData(view);
             }
         });
-        loadData();
+        loadData(view);
+
+        TextView messageTap = view.findViewById(R.id.messageTap);
+        messageTap.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SymptomsActivity.class);
+            startActivity(intent);
+        });
+
         return view;
     }
 
@@ -78,7 +88,10 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
         swipeRefreshLayout.setRefreshing(false);
     }
 
-    private void loadData() {
+    private void loadData(View view) {
+        TextView summary = view.findViewById(R.id.summarytext);
+        summary.setText("You doing good!");
+        summary.setTextColor(getResources().getColor(R.color.dark_green));
         onLoadStart();
         RetrofitClient.getClient().getEmotion(prefs.getToken()).enqueue(new Callback<GetEmotionResponse>() {
             @Override
@@ -91,7 +104,7 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
                     return;
                 }
                 emotions = response.body().getData();
-                setChart();
+                setChart(view);
             }
 
             @Override
@@ -101,7 +114,7 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
         });
     }
 
-    private void setChart() {
+    private void setChart(View view) {
         chart.setUsePercentValues(true);
         chart.getDescription().setEnabled(false);
         chart.setExtraOffsets(5, 10, 5, 5);
@@ -147,7 +160,7 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
         // entry label styling
         chart.setEntryLabelColor(Color.WHITE);
         chart.setEntryLabelTextSize(12f);
-        setData(chart, emotions);
+        setData(view, chart, emotions);
     }
 
     @Override
@@ -171,8 +184,7 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
         return s;
     }
 
-    private void setData(PieChart chart, List<List<String>> emotions) {
-        int count = 7;
+    private void setData(View view, PieChart chart, List<List<String>> emotions) {
         HashMap<String, Integer> map = new HashMap<>();
         for (List<String> emo : emotions) {
             map.put(emo.get(1), 1 + map.getOrDefault(emo.get(1), 0));
@@ -181,8 +193,18 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
+        int total = 0, neg = 0;
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             entries.add(new PieEntry(entry.getValue(), entry.getKey()));
+            String label = entry.getKey();
+            if(label.equalsIgnoreCase("Fear") || label.equalsIgnoreCase("Sad") || label.equalsIgnoreCase("Angry"))
+                ++neg;
+            ++total;
+            if(neg >= 0.75 * total) {
+                TextView summary = view.findViewById(R.id.summarytext);
+                summary.setText("You are on the sad side.");
+                summary.setTextColor(getResources().getColor(R.color.light_red));
+            }
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "Moods");

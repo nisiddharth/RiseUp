@@ -5,6 +5,9 @@
     android:id="@+id/swipe_to_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,7 +33,7 @@
             android:layout_below="@id/heading1"
             android:layout_marginVertical="10dp"
             android:layout_weight="1"
-            android:text="You are doing good"
+            android:text="You are doing good!"
             android:textAlignment="center"
             android:textColor="@color/dark_green"
             android:textStyle="bold" />
@@ -41,6 +44,67 @@
             android:layout_height="350dp"
             android:layout_below="@+id/summarytext" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/chart1"
+            android:id="@+id/messageTap"
+            android:textAlignment="center"
+            android:shadowDx="10"
+            android:outlineAmbientShadowColor="@color/dark_green"
+            android:text="Mental wellbeing is important\nTap here to know more about some symptoms to be watchful about."/>
+
+        <TextView
+            android:id="@+id/headingpast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginVertical="10dp"
+            android:layout_weight="1"
+            android:text="Past summary"
+            android:layout_below="@id/messageTap"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/switches"
+            android:layout_below="@id/headingpast">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/backdate"
+                android:text="← Previous" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/datedate"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:text="Date" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/summarytextpast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/switches"
+            android:layout_marginVertical="10dp"
+            android:layout_weight="1"
+            android:text="You are doing good"
+            android:textAlignment="center"
+            android:textColor="@color/dark_green"
+            android:textStyle="bold" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/chartpast"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_below="@+id/summarytextpast" />
 
     </RelativeLayout>
+    </ScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
