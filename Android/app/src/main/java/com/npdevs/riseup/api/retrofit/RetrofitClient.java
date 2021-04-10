@@ -13,8 +13,8 @@ public class RetrofitClient {
 
     public static APIInterface getClient() {
         if (apiInterface == null) {
-            //String BASE_URL = "http://192.168.0.106:4000/api/";
-            String BASE_URL = "https://hack-36-2k21.herokuapp.com/";
+            String BASE_URL = "http://192.168.1.201:5000/";
+            //String BASE_URL = "https://hack-36-2k21.herokuapp.com/";
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(getHttpClient())

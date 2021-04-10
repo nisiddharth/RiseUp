@@ -48,5 +48,13 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:text="Login"
-        android:id="@+id/loginBtn"/>
+        android:id="@+id/login_button"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="New User?"
+        android:id="@+id/sign_up_button"/>
 </androidx.appcompat.widget.LinearLayoutCompat>
