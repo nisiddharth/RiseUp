@@ -2,22 +2,28 @@ package com.npdevs.riseup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;   
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.npdevs.riseup.captureservice.SettingsUtil;
+import com.npdevs.riseup.databinding.ActivitySettingsBinding;
+import com.npdevs.riseup.utils.SharedPrefs;
 
 public class SettingsActivity extends AppCompatActivity {
-
+    ActivitySettingsBinding binding;
+    SharedPrefs prefs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        binding = ActivitySettingsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        prefs = new SharedPrefs(this);
 
-        Switch switchMood = findViewById(R.id.switchMood);
-        switchMood.setChecked(SettingsUtil.isCaptureServiceRunning(this));
-        switchMood.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        binding.switchMood.setChecked(SettingsUtil.isCaptureServiceRunning(this));
+        binding.switchMood.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
@@ -27,5 +33,18 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
         });
+
+        binding.logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+            }
+        });
+    }
+
+    private void logout (){
+        prefs.clearData();
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 }

@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 //Saving token in shared preferences
-                prefs.saveToken(response.body().getToken());
+                prefs.saveToken("Bearer "+response.body().getToken());
 
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(i);

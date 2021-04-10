@@ -21,14 +21,17 @@ public interface APIInterface {
     //Auth
     @POST("auth/signIn")
     Call<SignInResponse> signIn(@Body Map<String, String> body);
+
     @POST("auth/signUp")
     Call<SignUpResponse> signUp(@Body Map<String, String> body);
 
     //User
     @POST("user/save/token")
-    Call<SaveTokenResponse> saveDeviceToken(@Body Map<String, String> body);
+    Call<SaveTokenResponse> saveDeviceToken(@Header("Authorization") String token, @Body Map<String, String> body);
+
     @POST("user/save/emotion")
-    Call<SaveEmotionResponse> saveEmotion(@Body Map<String, List<List<String>>> body);
+    Call<SaveEmotionResponse> saveEmotion(@Header("Authorization") String token, @Body Map<String, List<List<String>>> body);
+
     @GET("user/get/emotion")
     Call<GetEmotionResponse> getEmotion();
 

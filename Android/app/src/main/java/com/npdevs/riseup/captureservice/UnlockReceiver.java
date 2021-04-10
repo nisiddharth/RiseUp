@@ -15,12 +15,27 @@ import android.widget.Toast;
 
 import com.cottacush.android.hiddencam.HiddenCam;
 import com.cottacush.android.hiddencam.OnImageCapturedListener;
+import com.google.gson.Gson;
+import com.npdevs.riseup.api.responseModels.user.SaveEmotionResponse;
+import com.npdevs.riseup.api.retrofit.RetrofitClient;
 import com.npdevs.riseup.captureservice.predictivemodels.Classification;
 import com.npdevs.riseup.captureservice.predictivemodels.TensorFlowClassifier;
+import com.npdevs.riseup.utils.SharedPrefs;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UnlockReceiver extends BroadcastReceiver {
 
@@ -118,11 +133,38 @@ public class UnlockReceiver extends BroadcastReceiver {
             }
 
             final Classification res = classifier.recognize(normalized_pixels);
+            saveEmotion(context, res.getLabel());
             Toast.makeText(context, res.getLabel() + " " + res.getConf(), Toast.LENGTH_LONG).show();
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void saveEmotion(Context context, String label) {
+        SharedPrefs prefs = new SharedPrefs(context);
+        Date date = new Date();
+        Map<String, List<List<String>>> body = new HashMap<>();
+
+        body.put("emotion", new ArrayList<>(Arrays.asList(
+                new ArrayList<String>(Arrays.asList(String.valueOf(date.getTime()), label)))));
+        RetrofitClient.getClient().saveEmotion(prefs.getToken(),body).enqueue(new Callback<SaveEmotionResponse>() {
+            @Override
+            public void onResponse(Call<SaveEmotionResponse> call, Response<SaveEmotionResponse> response) {
+                if(!response.isSuccessful()){
+                    Gson gson = new Gson();
+                    SaveEmotionResponse errorResponse = gson.fromJson(response.errorBody().charStream(), SaveEmotionResponse.class);
+                    Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Toast.makeText(context, "Data sent!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<SaveEmotionResponse> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private Bitmap toGrayscale(Bitmap bmpOriginal) {
@@ -170,3 +212,4 @@ class KillThread extends Thread {
         }
     }
 }
+
