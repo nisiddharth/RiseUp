@@ -49,6 +49,7 @@ public class PermissionCtrl {
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.CAMERA,
                 Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.ACCESS_NOTIFICATION_POLICY,
         }, ALL_PERMISSION_REQUEST_CODE);
     }
 }
