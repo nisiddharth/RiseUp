@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -28,6 +29,8 @@ public class FrontActivity extends AppCompatActivity {
 
         ActionBar toolbar = getSupportActionBar();
         toolbar.setElevation(0);
+
+        getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
         tabLayout = findViewById(R.id.tablayout1);
         tabItem1 = findViewById(R.id.tab1);
