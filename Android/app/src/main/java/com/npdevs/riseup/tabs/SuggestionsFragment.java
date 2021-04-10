@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.npdevs.riseup.R;
+import com.npdevs.riseup.activity.ActivityActivity;
 import com.npdevs.riseup.books.BookActivity;
 import com.npdevs.riseup.emotion.EmotionDetectActivity;
 import com.npdevs.riseup.emotion.EmotionResultActivity;
@@ -38,6 +39,7 @@ public class SuggestionsFragment extends Fragment {
 
     private CardView musicCardView;
     private CardView booksCardView;
+    private CardView activitiesCardView;
 
     public SuggestionsFragment() {
         // Required empty public constructor
@@ -77,25 +79,24 @@ public class SuggestionsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_suggestions, container, false);
 
         musicCardView = view.findViewById(R.id.music);
-        musicCardView.setOnClickListener(new View.OnClickListener(){
+        musicCardView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("EmotionData", Context.MODE_PRIVATE);
-                if(sharedPreferences.getString("Emotion0",null) == null) {
+                if (sharedPreferences.getString("Emotion0", null) == null) {
                     Intent intent = new Intent(getActivity(), EmotionDetectActivity.class);
-                    intent.putExtra("name","music");
+                    intent.putExtra("name", "music");
                     startActivity(intent);
-                }
-                else {
+                } else {
                     Intent toResults = new Intent(getActivity(), EmotionResultActivity.class);
                     ArrayList<EmotionData> topFourArrayList = new ArrayList<>();
-                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion0",null),sharedPreferences.getFloat("EmotionValue0",0)));
-                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion1",null),sharedPreferences.getFloat("EmotionValue1",0)));
-                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion2",null),sharedPreferences.getFloat("EmotionValue2",0)));
-                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion3",null),sharedPreferences.getFloat("EmotionValue3",0)));
+                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion0", null), sharedPreferences.getFloat("EmotionValue0", 0)));
+                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion1", null), sharedPreferences.getFloat("EmotionValue1", 0)));
+                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion2", null), sharedPreferences.getFloat("EmotionValue2", 0)));
+                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion3", null), sharedPreferences.getFloat("EmotionValue3", 0)));
                     Bundle bundleToEmotionResults = new Bundle();
-                    bundleToEmotionResults.putSerializable("topFourEmotions", (Serializable)topFourArrayList);
+                    bundleToEmotionResults.putSerializable("topFourEmotions", (Serializable) topFourArrayList);
                     toResults.putExtra("emotionResultsBundle", bundleToEmotionResults);
                     startActivity(toResults);
                 }
@@ -107,24 +108,29 @@ public class SuggestionsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("EmotionData", Context.MODE_PRIVATE);
-                if(sharedPreferences.getString("Emotion0",null) == null) {
+                if (sharedPreferences.getString("Emotion0", null) == null) {
                     Intent intent = new Intent(getActivity(), EmotionDetectActivity.class);
-                    intent.putExtra("name","book");
+                    intent.putExtra("name", "book");
                     startActivity(intent);
-                }
-                else {
+                } else {
                     Intent toResults = new Intent(getActivity(), BookActivity.class);
                     ArrayList<EmotionData> topFourArrayList = new ArrayList<>();
-                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion0",null),sharedPreferences.getFloat("EmotionValue0",0)));
-                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion1",null),sharedPreferences.getFloat("EmotionValue1",0)));
-                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion2",null),sharedPreferences.getFloat("EmotionValue2",0)));
-                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion3",null),sharedPreferences.getFloat("EmotionValue3",0)));
+                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion0", null), sharedPreferences.getFloat("EmotionValue0", 0)));
+                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion1", null), sharedPreferences.getFloat("EmotionValue1", 0)));
+                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion2", null), sharedPreferences.getFloat("EmotionValue2", 0)));
+                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion3", null), sharedPreferences.getFloat("EmotionValue3", 0)));
                     Bundle bundleToEmotionResults = new Bundle();
-                    bundleToEmotionResults.putSerializable("topFourEmotions", (Serializable)topFourArrayList);
+                    bundleToEmotionResults.putSerializable("topFourEmotions", (Serializable) topFourArrayList);
                     toResults.putExtra("emotionResultsBundle", bundleToEmotionResults);
                     startActivity(toResults);
                 }
             }
+        });
+
+        activitiesCardView = view.findViewById(R.id.activityCard);
+        activitiesCardView.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ActivityActivity.class);
+            startActivity(intent);
         });
 
         return view;
