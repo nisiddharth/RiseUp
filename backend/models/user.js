@@ -32,6 +32,12 @@ const UserSchema = new mongoose.Schema({
             ref: 'user',
         }
     ],
+    requests: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'user',
+        }
+    ],
     encryptedPassword: String,
     salt: String,
 }, {
@@ -71,6 +77,7 @@ UserSchema.methods = {
             name: this.name,
             phone: this.phone,
             email: this.email,
+            _id: this._id,
         }
     }
 }
