@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:stretchColumns="1">
+    <View
+        android:layout_height="10dip"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="KNOW YOURSELF"
+
+        android:textAlignment="center"
+        android:textColor="#000"
+
+        android:textSize="15sp"
+        android:textStyle="bold" />
+    <View
+        android:layout_height="4dip"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Feeling sad or down? Confused about what's up with your mind? Well, look up your symptoms here and let us help you to deal with it! Rise Up and shine brighter!!"
+
+        android:textAlignment="center"
+        android:textColor="#000"
+
+        android:textSize="13sp"
+        />
+    <View
+        android:layout_height="15dip"
+        />
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+
+            android:padding="1dip"
+            android:text="1."
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text="Depression"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="Persistent feeling of sadness or loss of interest,"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+            android:padding="1dip"
+            android:text="" />
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text=""
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_column="2"
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="change in sleep, appetite, self-esteem, energy"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+    <View
+        android:layout_height="4dip"
+        />
+    <View
+        android:layout_height="1dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+
+            android:padding="1dip"
+            android:text="2."
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text="Anxiety"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="Out of proportion stress, inability to set aside"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+            android:padding="1dip"
+            android:text="" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text="Disorder"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_column="2"
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="a worry and restlessness"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+    <View
+        android:layout_height="4dip"
+        />
+    <View
+        android:layout_height="1dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+
+            android:padding="1dip"
+            android:text="3."
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text="OCD"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="Centres on themes such as fear of germs or"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+            android:padding="1dip"
+            android:text="" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_column="2"
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="need to arrange object in a specified manner"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+    <View
+        android:layout_height="4dip"
+        />
+    <View
+        android:layout_height="1dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+
+            android:padding="1dip"
+            android:text="4."
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text="Bipolar"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="Manic episodes may include symptoms such"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+            android:padding="1dip"
+            android:text="" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text="Disorder"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_column="2"
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="as high energy,reduced sleep and loss of touch"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+    <View
+        android:layout_height="4dip"
+        />
+    <View
+        android:layout_height="1dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+
+            android:padding="1dip"
+            android:text="5."
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text="Dementia"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="Symptom include forgetfulness, limited social"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+            android:padding="1dip"
+            android:text="" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_column="2"
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="skills and impaired thinking abilities"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+    <View
+        android:layout_height="4dip"
+        />
+    <View
+        android:layout_height="1dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+
+            android:padding="1dip"
+            android:text="6."
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text="Schizophrenia"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="It has thoughts or experiences that seem out"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+            android:padding="1dip"
+            android:text="" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_column="2"
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="of touch with reality and disorganised speech"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+    <View
+        android:layout_height="4dip"
+        />
+    <View
+        android:layout_height="1dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+
+            android:padding="1dip"
+            android:text="7."
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text="High Blood"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="It includes headache, shortness of breath,"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+            android:padding="1dip"
+            android:text="" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text="Pressure"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_column="2"
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="dizziness, chest pain and visual changes"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+    <View
+        android:layout_height="4dip"
+        />
+    <View
+        android:layout_height="1dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+
+            android:padding="1dip"
+            android:text="8."
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text="Autism"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="Symptoms have difficulty in communication"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+            android:padding="1dip"
+            android:text="" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_column="2"
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="and difficulty with social interactions"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+    <View
+        android:layout_height="4dip"
+        />
+    <View
+        android:layout_height="1dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+
+            android:padding="1dip"
+            android:text="9."
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text="PTSD"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="It includes nightmares or flashbacks, trauma,"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+            android:padding="1dip"
+            android:text="" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_column="2"
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="heightened reactivity to stimuli and anxiety"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+    <View
+        android:layout_height="4dip"
+        />
+    <View
+        android:layout_height="1dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+
+            android:padding="1dip"
+            android:text="10."
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text="Eating"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="Eating very little or very much,afraid of some"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+
+
+    <TableRow>
+
+        <TextView
+            android:layout_column="0"
+            android:padding="1dip"
+            android:text="" />
+
+        <TextView
+            android:layout_column="1"
+
+            android:padding="1dip"
+            android:text="Disorder"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_column="2"
+            android:gravity="right"
+            android:padding="1dip"
+            android:text="food, loss of control over taste buds and body"
+            android:textAlignment="viewStart"
+            android:textColor="#000" />
+    </TableRow>
+    <View
+        android:layout_height="4dip"
+        />
+    <View
+        android:layout_height="1dip"
+        android:background="#FF909090" />
+
+</TableLayout>
