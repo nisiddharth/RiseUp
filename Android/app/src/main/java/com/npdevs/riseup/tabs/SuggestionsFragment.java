@@ -1,17 +1,23 @@
 package com.npdevs.riseup.tabs;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.npdevs.riseup.emotion.EmotionDetectActivity;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+
 import com.npdevs.riseup.R;
+import com.npdevs.riseup.emotion.EmotionDetectActivity;
+import com.npdevs.riseup.emotion.EmotionResultActivity;
+import com.npdevs.riseup.helper.EmotionData;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -73,8 +79,23 @@ public class SuggestionsFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), EmotionDetectActivity.class);
-                startActivity(intent);
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("EmotionData", Context.MODE_PRIVATE);
+                if(sharedPreferences.getString("Emotion0",null) == null) {
+                    Intent intent = new Intent(getActivity(), EmotionDetectActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Intent toResults = new Intent(getActivity(), EmotionResultActivity.class);
+                    ArrayList<EmotionData> topFourArrayList = new ArrayList<>();
+                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion0",null),sharedPreferences.getFloat("EmotionValue0",0)));
+                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion1",null),sharedPreferences.getFloat("EmotionValue1",0)));
+                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion2",null),sharedPreferences.getFloat("EmotionValue2",0)));
+                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion3",null),sharedPreferences.getFloat("EmotionValue3",0)));
+                    Bundle bundleToEmotionResults = new Bundle();
+                    bundleToEmotionResults.putSerializable("topFourEmotions", (Serializable)topFourArrayList);
+                    toResults.putExtra("emotionResultsBundle", bundleToEmotionResults);
+                    startActivity(toResults);
+                }
             }
         });
 

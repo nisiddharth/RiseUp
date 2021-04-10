@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -165,6 +166,22 @@ public class EmotionDetectActivity extends AppCompatActivity {
         // Serializable object. Using new object to prevent concurrent modification exceptions.
         ArrayList<EmotionData> topFourArrayList = new ArrayList<EmotionData>();
         topFourArrayList.addAll(topFourEmotions);
+
+        // Code to save Emotion Information in Shared Preference
+        SharedPreferences sharedPreferences = getSharedPreferences("EmotionData",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("Emotion0",topFourArrayList.get(0).getEmotion());
+        editor.putString("Emotion1",topFourArrayList.get(1).getEmotion());
+        editor.putString("Emotion2",topFourArrayList.get(2).getEmotion());
+        editor.putString("Emotion3",topFourArrayList.get(3).getEmotion());
+
+        editor.putFloat("EmotionValue0", (float) topFourArrayList.get(0).getEmotionValue());
+        editor.putFloat("EmotionValue1", (float) topFourArrayList.get(1).getEmotionValue());
+        editor.putFloat("EmotionValue2", (float) topFourArrayList.get(2).getEmotionValue());
+        editor.putFloat("EmotionValue3", (float) topFourArrayList.get(3).getEmotionValue());
+
+        editor.commit();
 
         Bundle bundleToEmotionResults = new Bundle();
         bundleToEmotionResults.putSerializable("topFourEmotions", (Serializable)topFourArrayList);
