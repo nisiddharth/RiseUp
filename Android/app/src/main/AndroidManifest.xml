@@ -17,8 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.AddActivity"></activity>
+        <activity android:name=".friends.ProfileActivity"></activity>
+        <activity android:name=".friends.AddFriendsActivity" />
         <activity android:name=".books.DetailsActivity" />
+        <activity android:name=".activity.AddActivity" />
         <activity android:name=".books.BookActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".SymptomsActivity" />

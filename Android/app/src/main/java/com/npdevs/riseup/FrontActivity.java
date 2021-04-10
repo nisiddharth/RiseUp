@@ -34,6 +34,7 @@ public class FrontActivity extends AppCompatActivity {
 
         getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         tabLayout = findViewById(R.id.tablayout1);
+        tabLayout.setElevation(16.0f);
         tabItem1 = findViewById(R.id.tab1);
         tabItem2 = findViewById(R.id.tab2);
         tabItem3 = findViewById(R.id.tab3);
