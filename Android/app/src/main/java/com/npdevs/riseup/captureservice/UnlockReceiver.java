@@ -52,7 +52,7 @@ public class UnlockReceiver extends BroadcastReceiver {
             hiddenCam.destroy();
             return;
         }
-        String system_picture_directory = "/storage/emulated/0/Android/data/io.github.nisiddharth.hiddencamera/files";
+        String system_picture_directory = "/storage/emulated/0/Android/data/com.npdevs.riseup/files";
         if (hiddenCam != null) {
             hiddenCam.stop();
         }
@@ -98,7 +98,7 @@ public class UnlockReceiver extends BroadcastReceiver {
         if (count != -1) {
             FaceCropper faceCropper = new FaceCropper();
             Bitmap faceBmp = faceCropper.getCroppedImage(bitmap);
-            try (FileOutputStream out = new FileOutputStream("/storage/emulated/0/Android/data/io.github.nisiddharth.hiddencamera/files/out.jpg")) {
+            try (FileOutputStream out = new FileOutputStream("/storage/emulated/0/Android/data/com.npdevs.riseup/files/out.jpg")) {
                 faceBmp.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
                 runModel(faceBmp, context);
             } catch (IOException e) {
