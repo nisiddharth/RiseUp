@@ -2,6 +2,7 @@ package com.npdevs.riseup.emotion;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -26,6 +27,7 @@ import com.microsoft.projectoxford.face.contract.Emotion;
 import com.microsoft.projectoxford.face.contract.Face;
 import com.microsoft.projectoxford.face.rest.ClientException;
 import com.npdevs.riseup.R;
+import com.npdevs.riseup.activity.ActivityActivity;
 import com.npdevs.riseup.books.BookActivity;
 import com.npdevs.riseup.helper.CameraHelperActivity;
 import com.npdevs.riseup.helper.EmotionData;
@@ -168,8 +170,11 @@ public class EmotionDetectActivity extends AppCompatActivity {
         if(name.equals("music")) {
             toResults = new Intent(EmotionDetectActivity.this,EmotionResultActivity.class);
         }
-        else {
+        else if(name.equals("book")){
             toResults = new Intent(EmotionDetectActivity.this, BookActivity.class);
+        }
+        else {
+            toResults = new Intent(EmotionDetectActivity.this, ActivityActivity.class);
         }
         //add a bundle of the ArrayLists for scores and emotions
         ArrayList<EmotionData> emotionsSorted = this.orderedEmotionsToMap(emotionResults);

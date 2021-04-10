@@ -33,6 +33,7 @@ public class AddActivity extends AppCompatActivity {
                 type = "leisure";
             DatabaseActivityHelper databaseActivityHelper = new DatabaseActivityHelper(this);
             databaseActivityHelper.insertData(editText.getText().toString(), type);
+            finish();
         });
     }
 }
