@@ -107,7 +107,7 @@ exports.acceptInvite = async (req, res) => {
             })
         }
 
-        await User.findOneAndUpdate({ _id }, { $push: { friends: friend_id } });
+        await User.findOneAndUpdate({ _id }, { $push: { friends: friend_id }, $pull: { requests: friend_id } });
         await User.findOneAndUpdate({ _id: friend_id }, { $push: { friends: _id } });
 
         return res.json({
