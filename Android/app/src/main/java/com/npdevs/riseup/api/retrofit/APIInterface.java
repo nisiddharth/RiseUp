@@ -58,6 +58,6 @@ public interface APIInterface {
     Call<GetFriendsResponse> getFriends(@Header("Authorization") String token);
 
     @GET("video/get")
-    Call<GetVideoResponse> getVideos(@Header("Authorization") String token);
+    Call<GetVideoResponse> getVideos(@Header("Authorization") String token, @Query("emotion") String emotion);
 
 }

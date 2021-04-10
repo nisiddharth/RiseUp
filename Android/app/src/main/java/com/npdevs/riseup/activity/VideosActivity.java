@@ -38,6 +38,7 @@ public class VideosActivity extends AppCompatActivity {
     private ArrayList<EmotionData> topFourEmotionsList;
     private String emotion = null;
     private final static int TOP_EMOTION = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +67,7 @@ public class VideosActivity extends AppCompatActivity {
 
     private void loadData(){
         toggleProgress();
-        RetrofitClient.getClient().getVideos(prefs.getToken()).enqueue(new Callback<GetVideoResponse>() {
+        RetrofitClient.getClient().getVideos(prefs.getToken(), emotion).enqueue(new Callback<GetVideoResponse>() {
             @Override
             public void onResponse(Call<GetVideoResponse> call, Response<GetVideoResponse> response) {
                 toggleProgress();
