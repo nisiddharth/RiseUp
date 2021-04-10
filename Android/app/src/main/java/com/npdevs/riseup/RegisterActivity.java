@@ -20,7 +20,6 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     ActivityRegisterBinding binding;
-    boolean loading = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,22 +34,14 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void toggleProgress(){
-        if(binding.progressBar.getVisibility() == View.VISIBLE)
+    private void toggleProgress() {
+        if (binding.progressBar.getVisibility() == View.VISIBLE)
             binding.progressBar.setVisibility(View.INVISIBLE);
         else
             binding.progressBar.setVisibility(View.VISIBLE);
     }
 
-    private boolean validate() {
-        return binding.nameText.getText().toString() == null ||
-                binding.emailText.getText().toString() == null ||
-                binding.passwordText.getText().toString() == null;
-    }
-
     private void register(){
-        if(validate())
-            return;
         toggleProgress();
 
         Map<String, String> body = new HashMap<>();
