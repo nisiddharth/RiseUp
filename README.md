@@ -10,7 +10,9 @@ Official repo of team NP Devs for Hack36 4.0
 ## Table of Contents:
 
 ## Technology Stack:
-  1) 
+  1) Node.Js
+  2) MongoDB
+  3) Java Android
   
 
 ## Contributors:
