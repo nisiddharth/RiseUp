@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.VideosActivity"></activity>
+        <activity android:name=".activity.RequestActivity"></activity>
+        <activity android:name=".activity.VideosActivity" />
         <activity android:name=".activity.ActivityActivity" />
         <activity android:name=".friends.ProfileActivity" />
         <activity android:name=".friends.AddFriendsActivity" />

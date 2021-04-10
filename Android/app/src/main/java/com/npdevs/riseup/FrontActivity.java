@@ -26,6 +26,7 @@ import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.npdevs.riseup.activity.AddActivity;
+import com.npdevs.riseup.activity.RequestActivity;
 import com.npdevs.riseup.api.responseModels.user.SaveTokenResponse;
 import com.npdevs.riseup.api.retrofit.RetrofitClient;
 import com.npdevs.riseup.tabs.PageAdapter;
@@ -115,6 +116,11 @@ public class FrontActivity extends AppCompatActivity {
         if (id == R.id.action_add_activity) {
             Intent intent = new Intent(this, AddActivity.class);
             startActivity(intent);
+            return true;
+        }
+        if(id == R.id.action_requests){
+            Intent i = new Intent(this, RequestActivity.class);
+            startActivity(i);
             return true;
         }
 

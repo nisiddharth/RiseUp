@@ -44,6 +44,12 @@ public interface APIInterface {
     @POST("user/add/friend")
     Call<Response> addFriend(@Header("Authorization") String token, @Body Map<String, String> body);
 
+    @GET("user/requests")
+    Call<GetFriendsResponse> getAllRequest(@Header("Authorization") String token);
+
+    @POST("user/accept/invite")
+    Call<Response> acceptRequest(@Header("Authorization") String token, @Body Map<String, String> body);
+
     @GET("user/get/friends")
     Call<GetFriendsResponse> getFriends(@Header("Authorization") String token);
 

@@ -10,6 +10,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.npdevs.riseup.FrontActivity;
 import com.npdevs.riseup.R;
+import com.npdevs.riseup.activity.RequestActivity;
 import com.npdevs.riseup.api.responseModels.user.SaveTokenResponse;
 import com.npdevs.riseup.api.retrofit.RetrofitClient;
 import com.npdevs.riseup.utils.SharedPrefs;
@@ -42,7 +43,7 @@ public class NotificationService extends FirebaseMessagingService {
     }
 
     public void inviteNotification (RemoteMessage message){
-        Intent intent = new Intent(appContext, FrontActivity.class);
+        Intent intent = new Intent(appContext, RequestActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(appContext, 0, intent, 0);
         Map<String, String> data = message.getData();
