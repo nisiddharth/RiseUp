@@ -31,6 +31,9 @@ public interface APIInterface {
     @POST("user/save/token")
     Call<SaveTokenResponse> saveDeviceToken(@Header("Authorization") String token, @Body Map<String, String> body);
 
+    @DELETE("user/remove/token")
+    Call<Response> removeDeviceToken(@Header("Authorization") String token);
+
     @POST("user/save/emotion")
     Call<SaveEmotionResponse> saveEmotion(@Header("Authorization") String token, @Body Map<String, List<List<String>>> body);
 
@@ -41,6 +44,6 @@ public interface APIInterface {
     Call<Response> addFriend(@Header("Authorization") String token, @Body Map<String, String> body);
 
     @GET("user/get/friends")
-    Call<GetFriendsResponse>  getFriends(@Header("Authorization") String token);
+    Call<GetFriendsResponse> getFriends(@Header("Authorization") String token);
 
 }

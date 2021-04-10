@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.npdevs.riseup.FrontActivity;
 import com.npdevs.riseup.R;
 import com.npdevs.riseup.api.responseModels.user.SaveTokenResponse;
 import com.npdevs.riseup.api.retrofit.RetrofitClient;
@@ -24,7 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class NotificationService extends FirebaseMessagingService {
-    public static String CHANNEL_ID = "#8795";
+    public static String CHANNEL_ID = "#8794";
     public Context appContext;
     public SharedPreferences sharedPreferences;
 
@@ -33,30 +34,26 @@ public class NotificationService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
         //Setting up the references
         appContext = this.getApplicationContext();
-        //Retrieving the shared preferences instance
-        this.sharedPreferences = getSharedPreferences("BOX_NAMES", Context.MODE_PRIVATE);
         if(remoteMessage.getData().get("type").equals("alert")){
             alertNotification(remoteMessage);
+        }else if(remoteMessage.getData().get("type").equals("invite")){
+            inviteNotification(remoteMessage);
         }
     }
 
-    public void alertNotification(RemoteMessage message){
-        //Intent intent = new Intent(appContext, Reminder.class);
-        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        //PendingIntent pendingIntent = PendingIntent.getActivity(appContext, 0, intent, 0);
-
-        //Setting title as the box name
-
+    public void inviteNotification (RemoteMessage message){
+        Intent intent = new Intent(appContext, FrontActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(appContext, 0, intent, 0);
         Map<String, String> data = message.getData();
-        String title = data.get(sharedPreferences.getString(data.get("boxname"),"No Title"));
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(appContext, CHANNEL_ID)
-                //.setSmallIcon(R.drawable.logo)
-                .setContentTitle("Friend Alert")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("Invite")
                 .setContentText(data.get("message"))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 // Set the intent that will fire when the user taps the notification
-                //.setContentIntent(pendingIntent)
+                .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(appContext);
@@ -65,26 +62,27 @@ public class NotificationService extends FirebaseMessagingService {
         notificationManager.notify(100, builder.build());
     }
 
-    @Override
-    public void onNewToken(@NonNull String s) {
-        super.onNewToken(s);
-        Context context = this.getApplicationContext();
-        SharedPrefs prefs = new SharedPrefs(context);
+    public void alertNotification(RemoteMessage message){
+        Intent intent = new Intent(appContext, FrontActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(appContext, 0, intent, 0);
 
-        //Saving device token
-        Map<String, String> body = new HashMap<>();
-        body.put("token", s);
-        RetrofitClient.getClient().saveDeviceToken(prefs.getToken(),body).enqueue(new Callback<SaveTokenResponse>() {
-            @Override
-            public void onResponse(Call<SaveTokenResponse> call, Response<SaveTokenResponse> response) {
-                if(response.isSuccessful())
-                    Log.v("Token Saved", s);
-            }
+        //Setting title as the box name
 
-            @Override
-            public void onFailure(Call<SaveTokenResponse> call, Throwable t) {
+        Map<String, String> data = message.getData();
 
-            }
-        });
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(appContext, CHANNEL_ID)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("Friend Alert")
+                .setContentText(data.get("message"))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                // Set the intent that will fire when the user taps the notification
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(appContext);
+
+        // notificationId is a unique int for each notification that you must define
+        notificationManager.notify(100, builder.build());
     }
 }

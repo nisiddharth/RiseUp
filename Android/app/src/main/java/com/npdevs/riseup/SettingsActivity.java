@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.npdevs.riseup.captureservice.SettingsUtil;
 import com.npdevs.riseup.databinding.ActivitySettingsBinding;
+import com.npdevs.riseup.utils.SessionCtrl;
 import com.npdevs.riseup.utils.SharedPrefs;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -51,5 +52,7 @@ public class SettingsActivity extends AppCompatActivity {
         prefs.clearData();
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+
+        new SessionCtrl(this).onLogout();
     }
 }
