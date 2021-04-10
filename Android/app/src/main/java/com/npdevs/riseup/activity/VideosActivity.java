@@ -12,6 +12,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.npdevs.riseup.R;
 import com.npdevs.riseup.api.responseModels.videos.GetVideoResponse;
@@ -20,6 +21,9 @@ import com.npdevs.riseup.databinding.ActivityVideosBinding;
 import com.npdevs.riseup.databinding.RecyclerVideoBinding;
 import com.npdevs.riseup.datamodels.YoutubeVideo;
 import com.npdevs.riseup.utils.SharedPrefs;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.List;
 
@@ -80,7 +84,16 @@ public class VideosActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+            YoutubeVideo video = data.get(position);
+            holder.youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                @Override
+                public void onReady(YouTubePlayer youTubePlayer) {
+                    super.onReady(youTubePlayer);
+                    youTubePlayer.loadVideo(video.getVideoId(),0);
+                }
+            });
+            holder.title.setText(video.getTitle());
+            holder.channel.setText(video.getChannel());
         }
 
         @Override
@@ -89,9 +102,13 @@ public class VideosActivity extends AppCompatActivity {
         }
 
         private class ViewHolder extends RecyclerView.ViewHolder{
-
+            YouTubePlayerView youTubePlayerView;
+            TextView channel, title;
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
+                youTubePlayerView = binding.youtubePlayerView;
+                channel = binding.channel;
+                title = binding.title;
             }
         }
     }
