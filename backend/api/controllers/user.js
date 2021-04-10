@@ -109,6 +109,11 @@ exports.acceptInvite = async (req, res) => {
 
         await User.findOneAndUpdate({ _id }, { $push: { friends: friend_id } });
         await User.findOneAndUpdate({ _id: friend_id }, { $push: { friends: _id } });
+
+        return res.json({
+            status: 1,
+            message: "Invite was accepted!",
+        })
     } catch (err) {
         console.log("Get Emotion Error", err);
         return res.status(500).json({
