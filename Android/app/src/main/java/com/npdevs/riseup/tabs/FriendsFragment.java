@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,6 +35,7 @@ import java.util.List;
 public class FriendsFragment extends Fragment {
     FragmentFriendsBinding binding;
     private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
     List<UserMeta> data = new ArrayList<>();
     private SharedPrefs prefs;
     private Context context;
@@ -41,11 +43,13 @@ public class FriendsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_friends, container, false);
         context = getContext();
         prefs = new SharedPrefs(context);
 
         recyclerView = view.findViewById(R.id.recyclerview);
+        swipeRefreshLayout = view.findViewById(R.id.swipe_to_refresh);
         FloatingActionButton addFriends = view.findViewById(R.id.addFriendsBtn);
         addFriends.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), AddFriendsActivity.class);
@@ -53,13 +57,31 @@ public class FriendsFragment extends Fragment {
         });
 
         loadData();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadData();
+            }
+        });
+
         return view;
     }
 
+    private void onStartLoad(){
+        swipeRefreshLayout.setRefreshing(true);
+    }
+
+    private void onCompleteLoad(){
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
     private void loadData(){
+        onStartLoad();
         RetrofitClient.getClient().getFriends(prefs.getToken()).enqueue(new Callback<GetFriendsResponse>() {
             @Override
             public void onResponse(Call<GetFriendsResponse> call, Response<GetFriendsResponse> response) {
+                onCompleteLoad();
                 if(response.isSuccessful()){
                     data = response.body().getFriends();
                     setUpRecyclerView();

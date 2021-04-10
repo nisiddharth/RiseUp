@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,20 +42,36 @@ public class RequestActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         prefs = new SharedPrefs(this);
 
+        binding.swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadData();
+            }
+        });
+
         loadData();
     }
 
+    private void onCompleteLoad() {
+        binding.swipeToRefresh.setRefreshing(false);
+    }
+
+    private void onStartLoad() {
+        binding.swipeToRefresh.setRefreshing(true);
+    }
+
     private void loadData() {
+        onStartLoad();
         RetrofitClient.getClient().getAllRequest(prefs.getToken()).enqueue(new Callback<GetFriendsResponse>() {
             @Override
             public void onResponse(Call<GetFriendsResponse> call, retrofit2.Response<GetFriendsResponse> response) {
+                onCompleteLoad();
                 if (!response.isSuccessful()) {
                     Gson gson = new Gson();
                     Response errorResponse = gson.fromJson(response.errorBody().charStream(), Response.class);
                     Toast.makeText(RequestActivity.this, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 requests = response.body().getFriends();
                 setRecycler();
             }
@@ -91,6 +109,7 @@ public class RequestActivity extends AppCompatActivity {
             holder.accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    onAcceptLoad(holder);
                     acceptRequest(user);
                 }
             });
@@ -104,6 +123,7 @@ public class RequestActivity extends AppCompatActivity {
         private class ViewHolder extends RecyclerView.ViewHolder {
             TextView name, email, phone;
             Button accept;
+            ProgressBar progressBar;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -111,7 +131,13 @@ public class RequestActivity extends AppCompatActivity {
                 email = binding.email;
                 phone = binding.phone;
                 accept = binding.accept;
+                progressBar = binding.progress;
             }
+        }
+
+        private void onAcceptLoad(ViewHolder holder) {
+            holder.progressBar.setVisibility(View.VISIBLE);
+            holder.accept.setVisibility(View.GONE);
         }
 
         void acceptRequest(UserMeta userMeta) {
@@ -127,6 +153,7 @@ public class RequestActivity extends AppCompatActivity {
                     }
 
                     Toast.makeText(RequestActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    loadData();
                 }
 
                 @Override
