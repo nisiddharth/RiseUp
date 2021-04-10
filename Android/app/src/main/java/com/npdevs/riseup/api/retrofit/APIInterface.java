@@ -7,6 +7,7 @@ import com.npdevs.riseup.api.responseModels.user.GetEmotionResponse;
 import com.npdevs.riseup.api.responseModels.user.GetFriendsResponse;
 import com.npdevs.riseup.api.responseModels.user.SaveEmotionResponse;
 import com.npdevs.riseup.api.responseModels.user.SaveTokenResponse;
+import com.npdevs.riseup.api.responseModels.videos.GetVideoResponse;
 
 import java.util.List;
 import java.util.Map;
@@ -45,5 +46,8 @@ public interface APIInterface {
 
     @GET("user/get/friends")
     Call<GetFriendsResponse> getFriends(@Header("Authorization") String token);
+
+    @GET("video/get")
+    Call<GetVideoResponse> getVideos(@Header("Authorization") String token);
 
 }
