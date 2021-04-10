@@ -78,6 +78,7 @@ public class EmotionDetectActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         name = intent.getStringExtra("name");
+        Log.e("ashu12chi",name);
 
     }
     private void startDetection() {
@@ -163,7 +164,8 @@ public class EmotionDetectActivity extends AppCompatActivity {
     }
     private void toResults(Emotion emotionResults){
         Intent toResults;
-        if(name == "music") {
+        Log.e("ashu",name);
+        if(name.equals("music")) {
             toResults = new Intent(EmotionDetectActivity.this,EmotionResultActivity.class);
         }
         else {
