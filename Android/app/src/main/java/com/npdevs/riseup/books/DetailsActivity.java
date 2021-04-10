@@ -1,5 +1,6 @@
 package com.npdevs.riseup.books;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -27,8 +28,6 @@ public class DetailsActivity extends AppCompatActivity {
     public TextView authornm;
     public TextView link1;
     public TextView link2;
-    public TextView upvote;
-    public ImageButton vote;
     String selectedBook;
 
     @Override
@@ -36,8 +35,9 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        vote = (ImageButton)findViewById(R.id.upvoteb);
-        upvote = (TextView)findViewById(R.id.votes);
+        ActionBar toolbar = getSupportActionBar();
+        toolbar.setTitle("Book details");
+
         bkname = (TextView)findViewById(R.id.bkname);
         authornm = (TextView)findViewById(R.id.authnm);
         link1 = (TextView)findViewById(R.id.amlink);
@@ -63,7 +63,6 @@ public class DetailsActivity extends AppCompatActivity {
                 authornm.setText(auth);
                 link1.setText(amazon);
                 link2.setText(goodreads);
-                upvote.setText(vote);
             }
             cur.close();
             bkdb.endTransaction();
@@ -96,20 +95,5 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void upvoteClicked(View v)
-    {
-
-        upvote.setText("7");
-
-    }
-
-
-    public void logoutClicked(View v)
-    {
-        Intent intent = new Intent(DetailsActivity.this, LoginActivity.class);
-        startActivity(intent);
-
     }
 }

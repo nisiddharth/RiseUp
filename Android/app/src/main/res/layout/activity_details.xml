@@ -2,14 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Book Name"
+        android:textColor="@color/black"
         android:id="@+id/bkname"
-        android:background="@color/white"
-        android:textColor="@color/dark_red"
         android:textSize="25dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -22,8 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Author"
-        android:background="@color/white"
-        android:textColor="@color/booksie_blue"
+        android:textColor="@color/black"
         android:textSize="20dp"
         android:id="@+id/authnm"
         android:textStyle="italic"
@@ -35,8 +32,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Amazon:"
-        android:background="@color/white"
+        android:text="Amazon: "
         android:textColor="@color/black"
         android:id="@+id/amznLink"
         android:layout_marginTop="80dp"
@@ -47,8 +43,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GoodReads:"
-        android:background="@color/white"
+        android:text="GoodReads: "
         android:id="@+id/gdrLink"
         android:layout_marginTop="141dp"
         android:textColor="@color/black"
@@ -63,7 +58,6 @@
         android:id="@+id/amlink"
         android:autoLink="web"
         android:textColor="@color/dark_red"
-        android:background="@color/white"
         android:layout_marginRight="10dp"
         android:layout_toRightOf="@+id/amznLink"
         android:layout_alignTop="@+id/amznLink"
@@ -77,43 +71,11 @@
         android:text="New Text"
         android:id="@+id/gdlink"
         android:textColor="@color/dark_red"
-        android:background="@color/white"
         android:layout_marginRight="10dp"
         android:autoLink="web"
         android:layout_toRightOf="@+id/gdrLink"
         android:layout_alignTop="@+id/gdrLink"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
-
-
-    <ImageButton
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/imageButton"
-        android:src="@drawable/ic_baseline_book_24"
-        android:onClick="logoutClicked"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/upvoteb"
-        android:src="@drawable/ic_baseline_how_to_vote_24"
-        android:background="@color/white"
-        android:layout_alignBottom="@+id/authnm"
-        android:layout_toLeftOf="@+id/imageButton"
-        android:layout_toStartOf="@+id/imageButton" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/votes"
-        android:onClick="upvoteClicked"
-        android:layout_above="@+id/upvoteb"
-        android:layout_alignRight="@+id/upvoteb"
-        android:layout_alignEnd="@+id/upvoteb" />
 
 </RelativeLayout>

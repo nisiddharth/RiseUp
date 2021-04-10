@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.npdevs.riseup.LoginActivity;
@@ -33,6 +34,8 @@ public class BookActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
+        ActionBar toolbar = getSupportActionBar();
+        toolbar.setTitle("Recommendations");
 
         bknm = (TextView) findViewById(R.id.moodTV);
         lview = (ListView) findViewById(R.id.bklist);
