@@ -8,6 +8,13 @@ Official repo of team NP Devs for Hack36 4.0
   
   
 ## Table of Contents:
+  We have developed this app whose features are:
+  1) Identify the mood of the user by clicking his/her image during phone unlock and identifying the current mood through ML.
+  2) After identifying the mood, the app suggests relative music, videos, books and activities that can make the user happy and boost his mood.
+  3) If the user is excessively upset, the app provides a feature to notify the friends and relatives who can lend a hand of support in times of utter distress.
+  4) Also this app allows the other users to keep a check on their friend’s mental health by sharing the data.
+  5) A graphical analysis of the overall mental health of the user is prepared by which the user can keep a check on the same.
+  6) The user can check for symptoms of serious health issues through a tabulated data from which the possible problem can be predicted and the user can reach for professional        medical help.
 
 
 ## Technology Stack:
