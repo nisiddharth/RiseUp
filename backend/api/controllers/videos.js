@@ -2,15 +2,15 @@ const { google } = require('googleapis');
 
 let keyword = {
     anger: "anger management, anger control motivation, avoid anger",
-    sad: "",
-    happy: "",
-    Disgust: "disgust feeling, disgust emotion",
-    Fear: "fear management, face fear, overcome fear",
-    Sad: "happiness motivation",
-
+    sad: "happiness motivation",
+    happy: "mental wellbeing",
+    disgust: "disgust feeling, disgust emotion",
+    fear: "fear management, face fear, overcome fear",
+    sad: "happiness motivation",
+    surprise: "mental wellbeing",
 }
 
-exports.getVideos = async (req, res) => {
+exports.getVideos = async (req, res) => {       
     let emotion = "anger";
     console.log('Enter');
     try {
