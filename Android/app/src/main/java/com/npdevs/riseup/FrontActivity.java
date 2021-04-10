@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+import com.npdevs.riseup.activity.AddActivity;
 import com.npdevs.riseup.tabs.PageAdapter;
 import com.npdevs.riseup.utils.PermissionCtrl;
 
@@ -33,6 +34,7 @@ public class FrontActivity extends AppCompatActivity {
 
         getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         tabLayout = findViewById(R.id.tablayout1);
+        tabLayout.setElevation(16.0f);
         tabItem1 = findViewById(R.id.tab1);
         tabItem2 = findViewById(R.id.tab2);
         tabItem3 = findViewById(R.id.tab3);
@@ -87,6 +89,12 @@ public class FrontActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        if(id == R.id.action_add_activity) {
+            Intent intent = new Intent(this, AddActivity.class);
             startActivity(intent);
             return true;
         }

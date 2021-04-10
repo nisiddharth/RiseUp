@@ -26,6 +26,7 @@ import com.microsoft.projectoxford.face.contract.Emotion;
 import com.microsoft.projectoxford.face.contract.Face;
 import com.microsoft.projectoxford.face.rest.ClientException;
 import com.npdevs.riseup.R;
+import com.npdevs.riseup.books.BookActivity;
 import com.npdevs.riseup.helper.CameraHelperActivity;
 import com.npdevs.riseup.helper.EmotionData;
 import com.npdevs.riseup.helper.FailedImageView;
@@ -59,6 +60,8 @@ public class EmotionDetectActivity extends AppCompatActivity {
     private ProgressDialog loadingDialog;
     // tag used for logging this activity
     private static final String logTag = "EmotionDetectActivity";
+    // getExtra
+    private String name = null;
 
     private Byte[] failedImage;
     @Override
@@ -71,6 +74,10 @@ public class EmotionDetectActivity extends AppCompatActivity {
         // show a warning that these images are sent to microsoft web services and may be stored
         Toast.makeText(this, getString(R.string.consent_warning),
                 Toast.LENGTH_LONG).show();
+
+        Intent intent = getIntent();
+
+        name = intent.getStringExtra("name");
 
     }
     private void startDetection() {
@@ -155,8 +162,13 @@ public class EmotionDetectActivity extends AppCompatActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
     private void toResults(Emotion emotionResults){
-        Intent toResults = new Intent(EmotionDetectActivity.this,
-                EmotionResultActivity.class);
+        Intent toResults;
+        if(name == "music") {
+            toResults = new Intent(EmotionDetectActivity.this,EmotionResultActivity.class);
+        }
+        else {
+            toResults = new Intent(EmotionDetectActivity.this, BookActivity.class);
+        }
         //add a bundle of the ArrayLists for scores and emotions
         ArrayList<EmotionData> emotionsSorted = this.orderedEmotionsToMap(emotionResults);
         // right now the graph only displays top 4 emotions, so don't need to send more than

@@ -84,6 +84,7 @@ public class SuggestionsFragment extends Fragment {
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("EmotionData", Context.MODE_PRIVATE);
                 if(sharedPreferences.getString("Emotion0",null) == null) {
                     Intent intent = new Intent(getActivity(), EmotionDetectActivity.class);
+                    intent.putExtra("name","music");
                     startActivity(intent);
                 }
                 else {
@@ -105,8 +106,24 @@ public class SuggestionsFragment extends Fragment {
         booksCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), BookActivity.class);
-                startActivity(intent);
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("EmotionData", Context.MODE_PRIVATE);
+                if(sharedPreferences.getString("Emotion0",null) == null) {
+                    Intent intent = new Intent(getActivity(), EmotionDetectActivity.class);
+                    intent.putExtra("name","book");
+                    startActivity(intent);
+                }
+                else {
+                    Intent toResults = new Intent(getActivity(), BookActivity.class);
+                    ArrayList<EmotionData> topFourArrayList = new ArrayList<>();
+                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion0",null),sharedPreferences.getFloat("EmotionValue0",0)));
+                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion1",null),sharedPreferences.getFloat("EmotionValue1",0)));
+                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion2",null),sharedPreferences.getFloat("EmotionValue2",0)));
+                    topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion3",null),sharedPreferences.getFloat("EmotionValue3",0)));
+                    Bundle bundleToEmotionResults = new Bundle();
+                    bundleToEmotionResults.putSerializable("topFourEmotions", (Serializable)topFourArrayList);
+                    toResults.putExtra("emotionResultsBundle", bundleToEmotionResults);
+                    startActivity(toResults);
+                }
             }
         });
 

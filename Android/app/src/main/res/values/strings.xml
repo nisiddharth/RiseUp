@@ -16,6 +16,7 @@
     <string name="title_activity_result">ResultActivity</string>
     <string name="result_title_chart">Top 4 Emotions</string>
     <string name="result_title_playlist">Playlist for top emotion: %1$s </string>
+    <string name="result_title_booklist">Booklist for top emotion: %1$s </string>
     <string name="happy_playlist_url">https://open.spotify.com/user/maxkernchen/playlist/3vScrksSS6JMrujlrjEDlR</string>
     <string name="angry_playlist_url">https://open.spotify.com/user/maxkernchen/playlist/6Xtv1cTJLUXXki6P36114k</string>
     <string name="netural_playlist_url">https://open.spotify.com/user/maxkernchen/playlist/2jnf7oEDRcmK3Q3V5QadPE</string>
