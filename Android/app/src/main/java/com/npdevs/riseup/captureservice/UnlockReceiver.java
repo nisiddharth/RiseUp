@@ -56,7 +56,7 @@ public class UnlockReceiver extends BroadcastReceiver {
         if (hiddenCam != null) {
             hiddenCam.stop();
         }
-        hiddenCam = new HiddenCam(context, new File(system_picture_directory), new OnImageCapturedListener() {
+            hiddenCam = new HiddenCam(context, new File(system_picture_directory), new OnImageCapturedListener() {
             @Override
             public void onImageCaptured(File file) {
 //                Toast.makeText(context, "Done", Toast.LENGTH_SHORT).show();
@@ -146,7 +146,7 @@ public class UnlockReceiver extends BroadcastReceiver {
         Date date = new Date();
         Map<String, List<List<String>>> body = new HashMap<>();
 
-        body.put("emotion", new ArrayList<>(Arrays.asList(
+        body.put("emotions", new ArrayList<>(Arrays.asList(
                 new ArrayList<String>(Arrays.asList(String.valueOf(date.getTime()), label)))));
         RetrofitClient.getClient().saveEmotion(prefs.getToken(),body).enqueue(new Callback<SaveEmotionResponse>() {
             @Override

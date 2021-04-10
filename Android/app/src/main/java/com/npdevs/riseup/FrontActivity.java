@@ -7,12 +7,14 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.npdevs.riseup.tabs.PageAdapter;
+import com.npdevs.riseup.utils.PermissionCtrl;
 
 public class FrontActivity extends AppCompatActivity {
 
@@ -29,6 +31,7 @@ public class FrontActivity extends AppCompatActivity {
         ActionBar toolbar = getSupportActionBar();
         toolbar.setElevation(0);
 
+        getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         tabLayout = findViewById(R.id.tablayout1);
         tabItem1 = findViewById(R.id.tab1);
         tabItem2 = findViewById(R.id.tab2);
@@ -89,5 +92,11 @@ public class FrontActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        new PermissionCtrl(this).askAllPermissions();
     }
 }
