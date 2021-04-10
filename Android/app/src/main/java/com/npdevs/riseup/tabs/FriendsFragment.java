@@ -1,5 +1,6 @@
 package com.npdevs.riseup.tabs;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,106 +13,98 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.npdevs.riseup.MainActivity;
 import com.npdevs.riseup.R;
+import com.npdevs.riseup.api.responseModels.user.GetFriendsResponse;
+import com.npdevs.riseup.api.retrofit.RetrofitClient;
+import com.npdevs.riseup.databinding.FragmentFriendsBinding;
+import com.npdevs.riseup.databinding.RecyclerFriendsBinding;
+import com.npdevs.riseup.datamodels.UserMeta;
 import com.npdevs.riseup.friends.AddFriendsActivity;
 import com.npdevs.riseup.friends.ProfileActivity;
+import com.npdevs.riseup.utils.SharedPrefs;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FriendsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FriendsFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public FriendsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ftab2.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FriendsFragment newInstance(String param1, String param2) {
-        FriendsFragment fragment = new FriendsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
+    FragmentFriendsBinding binding;
+    private RecyclerView recyclerView;
+    List<UserMeta> data = new ArrayList<>();
+    private SharedPrefs prefs;
+    private Context context;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_friends, container, false);
+        context = getContext();
+        prefs = new SharedPrefs(context);
 
+        recyclerView = view.findViewById(R.id.recyclerview);
         FloatingActionButton addFriends = view.findViewById(R.id.addFriendsBtn);
         addFriends.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), AddFriendsActivity.class);
             startActivity(intent);
         });
 
-        List<SampleItem2> msampleItem = new ArrayList<>();
-
-        msampleItem.add(new SampleItem2("8004344462","nsp"));
-        msampleItem.add(new SampleItem2("1234567890","someone"));
-
-
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        RecyclerView.Adapter adapter = new FriendsFragment.MainAdapter(msampleItem);
-        recyclerView.setAdapter(adapter);
-
+        loadData();
         return view;
     }
 
+    private void loadData(){
+        RetrofitClient.getClient().getFriends(prefs.getToken()).enqueue(new Callback<GetFriendsResponse>() {
+            @Override
+            public void onResponse(Call<GetFriendsResponse> call, Response<GetFriendsResponse> response) {
+                if(response.isSuccessful()){
+                    data = response.body().getFriends();
+                    setUpRecyclerView();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetFriendsResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void setUpRecyclerView (){
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        RecyclerView.Adapter adapter = new FriendsFragment.MainAdapter(data);
+        recyclerView.setAdapter(adapter);
+    }
+
     private class MainAdapter extends RecyclerView.Adapter<FriendsFragment.MainAdapter.ViewHolder> {
-        private List<SampleItem2> samples;
-
+        private List<UserMeta> samples;
+        private RecyclerFriendsBinding binding;
         class ViewHolder extends RecyclerView.ViewHolder {
+            private TextView name, email, phone;
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                name= binding.name;
+                email = binding.email;
+                phone = binding.phone;
 
-            private TextView textView, textViewmob;
-
-            ViewHolder(View view) {
-                super(view);
-                textView = view.findViewById(R.id.textView11);
-                textViewmob = view.findViewById(R.id.textView11mob);
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                        intent.putExtra("user_id",samples.get(getAdapterPosition()).getId());
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                });
             }
         }
 
-        MainAdapter(List<SampleItem2> samples) {
+        MainAdapter(List<UserMeta> samples) {
             this.samples = samples;
             Log.e("nsp", samples.size() + "");
         }
@@ -119,28 +112,15 @@ public class FriendsFragment extends Fragment {
         @NonNull
         @Override
         public FriendsFragment.MainAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater
-                    .from(parent.getContext())
-                    .inflate(R.layout.item_main_feature, parent, false);
-
-            return new FriendsFragment.MainAdapter.ViewHolder(view);
+            binding = RecyclerFriendsBinding.inflate(LayoutInflater.from(context), parent, false);
+            return new FriendsFragment.MainAdapter.ViewHolder(binding.getRoot());
         }
 
         @Override
         public void onBindViewHolder(@NonNull FriendsFragment.MainAdapter.ViewHolder holder, int position) {
-            holder.textView.setText(samples.get(position).getName());
-            holder.textViewmob.setText("Mob: " + samples.get(position).getMob());
-            final String str = holder.textView.getText().toString();
-            final String str1 = samples.get(position).getMob();
-            holder.textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getActivity(), ProfileActivity.class);
-                    intent.putExtra("MOB",str1);
-                    startActivity(intent);
-                    getActivity().finish();
-                }
-            });
+            holder.name.setText(samples.get(position).getName());
+            holder.phone.setText("Mob: " + samples.get(position).getPhone());
+            holder.email.setText(samples.get(position).getEmail());
         }
 
         @Override

@@ -1,8 +1,10 @@
 package com.npdevs.riseup.api.retrofit;
 
+import com.npdevs.riseup.api.responseModels.Response;
 import com.npdevs.riseup.api.responseModels.auth.SignInResponse;
 import com.npdevs.riseup.api.responseModels.auth.SignUpResponse;
 import com.npdevs.riseup.api.responseModels.user.GetEmotionResponse;
+import com.npdevs.riseup.api.responseModels.user.GetFriendsResponse;
 import com.npdevs.riseup.api.responseModels.user.SaveEmotionResponse;
 import com.npdevs.riseup.api.responseModels.user.SaveTokenResponse;
 
@@ -34,5 +36,11 @@ public interface APIInterface {
 
     @GET("user/get/emotion")
     Call<GetEmotionResponse> getEmotion();
+
+    @POST("user/add/friend")
+    Call<Response> addFriend(@Header("Authorization") String token, @Body Map<String, String> body);
+
+    @GET("user/get/friends")
+    Call<GetFriendsResponse>  getFriends(@Header("Authorization") String token);
 
 }
