@@ -3,6 +3,7 @@ package com.npdevs.riseup;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabItem;
@@ -50,5 +51,12 @@ public class Front extends AppCompatActivity {
         });
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences sharedPreferences = getSharedPreferences("EmotionData", MODE_PRIVATE);
+        sharedPreferences.edit().clear().commit();
     }
 }
