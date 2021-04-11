@@ -9,7 +9,7 @@ This is a self care app that primarily focusses on reducing the stress levels of
   
 ## Table of Contents:
   The main features of the app are:
-  1) Identify the mood of the user by clicking his/her image during phone unlock and identifying the current mood through ML.
+  1) Identify the mood of the user by clicking his/her image during phone unlock and identifying the current mood through ML. According to a 2018 report, Gen Z smartphone users      in USA unlock their devices on average 79 times daily!!
   2) After identifying the mood, the app suggests relative music, videos, books and activities that can make the user happy and boost his mood.
   3) If the user is excessively upset, the app provides a feature to notify the friends and relatives who can lend a hand of support in times of utter distress.
   4) Also this app allows the other users to keep a check on their friend’s mental health by sharing the data.
