@@ -33,7 +33,6 @@ This is a self care app that primarily focusses on reducing the stress levels of
   6) Youtube API
   7) Spotify API
   8) Okhttp3 logging interceptor
-  9) Firebase Cloud Messaging
 
   Tools Used:
   1) Android Studio
@@ -43,6 +42,10 @@ This is a self care app that primarily focusses on reducing the stress levels of
   Component Used:
   1) Google Material Design Library
   2) PierfrancescoSoffritti/android-youtube-player
+
+  Services Used:
+  1) Heroku
+  2) Firebase Cloud Messaging
   
 
 ## Contributors:
