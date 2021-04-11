@@ -16,6 +16,8 @@ public class DoctorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Professionals");
         apollo = findViewById(R.id.apollo);
         practo = findViewById(R.id.practo);
         tataHealth = findViewById(R.id.tatahealth);
@@ -52,5 +54,11 @@ public class DoctorActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 }

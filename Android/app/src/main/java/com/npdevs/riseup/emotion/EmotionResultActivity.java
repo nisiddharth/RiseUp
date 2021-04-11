@@ -38,7 +38,7 @@ public class EmotionResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emotion_result);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // get the scores and emotions as String ArrayLists
         // they should already be in order from greatest to lowest
         Bundle extras = getIntent().getExtras();

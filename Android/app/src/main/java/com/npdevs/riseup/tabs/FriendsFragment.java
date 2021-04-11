@@ -149,7 +149,6 @@ public class FriendsFragment extends Fragment {
                         intent.putExtra("id", samples.get(getAdapterPosition()).getId());
                         intent.putExtra("name", samples.get(getAdapterPosition()).getName());
                         startActivity(intent);
-                        getActivity().finish();
                     }
                 });
             }

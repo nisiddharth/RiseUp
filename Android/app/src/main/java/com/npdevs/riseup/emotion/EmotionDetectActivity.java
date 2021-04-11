@@ -71,6 +71,7 @@ public class EmotionDetectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emotion_detect);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         faceClient = new FaceServiceRestClient(getString(R.string.api_end_point),
                 getString(R.string.face_subscription_key));
         selectImageButton = findViewById(R.id.buttonSelectImage);
