@@ -105,6 +105,12 @@ public class FrontActivity extends AppCompatActivity {
             return true;
         }
 
+        if(id == R.id.action_medical) {
+            Intent intent = new Intent(this,DoctorActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
