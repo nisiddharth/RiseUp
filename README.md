@@ -1,7 +1,11 @@
-# RiseUp
+# RiseUp- by NP Devs
 Official repo of team NP Devs for Hack36 4.0 
 
 <a href="https://hack36.com"> <img src="http://bit.ly/BuiltAtHack36" height=20px> </a>
+
+Project demo: https://youtu.be/c-G0YSk0DRY
+
+Project PPT: https://drive.google.com/file/d/1UCwItTfZOhbqsxN8JDjEchLGa-uAsL76/view?usp=sharing
 
 
 ## Introduction:
