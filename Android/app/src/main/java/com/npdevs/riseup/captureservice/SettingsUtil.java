@@ -19,7 +19,7 @@ public class SettingsUtil {
 
     public static boolean isCaptureServiceRunning(Context context) {
         String name = ContextCompat.getSystemServiceName(context, CaptureService.class);
-        if(name == null || name.isEmpty())
+        if (name == null || name.isEmpty())
             return false;
         Toast.makeText(context, name, Toast.LENGTH_LONG).show();
         return name.equals("ForegroundServiceChannel");

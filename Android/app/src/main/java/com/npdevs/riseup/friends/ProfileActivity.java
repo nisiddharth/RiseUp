@@ -1,12 +1,5 @@
 package com.npdevs.riseup.friends;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,6 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -35,7 +31,6 @@ import com.npdevs.riseup.SymptomsActivity;
 import com.npdevs.riseup.api.responseModels.user.GetEmotionResponse;
 import com.npdevs.riseup.api.retrofit.RetrofitClient;
 import com.npdevs.riseup.databinding.ActivityProfileBinding;
-import com.npdevs.riseup.databinding.FragmentSummaryBinding;
 import com.npdevs.riseup.utils.SharedPrefs;
 
 import java.text.SimpleDateFormat;
@@ -45,6 +40,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProfileActivity extends AppCompatActivity implements OnChartValueSelectedListener {
 
@@ -56,6 +55,7 @@ public class ProfileActivity extends AppCompatActivity implements OnChartValueSe
     private int offset = 0;
     private String friendId;
     private String friendName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +79,7 @@ public class ProfileActivity extends AppCompatActivity implements OnChartValueSe
         setDateNav();
     }
 
-    private void setMetaData(){
+    private void setMetaData() {
         binding.heading.setText(friendName);
     }
 

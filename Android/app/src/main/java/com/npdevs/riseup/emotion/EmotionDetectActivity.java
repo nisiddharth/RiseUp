@@ -1,8 +1,5 @@
 package com.npdevs.riseup.emotion;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -20,6 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.microsoft.projectoxford.face.FaceServiceClient;
 import com.microsoft.projectoxford.face.FaceServiceRestClient;
@@ -51,6 +50,8 @@ public class EmotionDetectActivity extends AppCompatActivity {
     private static final int REQUEST_TAKE_PICTURE = 0;
     // Compressing Value for bitmap of image taken
     private static final int COMPRESSION_BIT_MAP = 70;
+    // tag used for logging this activity
+    private static final String logTag = "EmotionDetectActivity";
     // Button which is displayed on main page to selected an image
     private Button selectImageButton;
     // The URI of the image selected to detect.
@@ -61,19 +62,18 @@ public class EmotionDetectActivity extends AppCompatActivity {
     private FaceServiceRestClient faceClient;
     //dialog for showing progress of analyzing image
     private ProgressDialog loadingDialog;
-    // tag used for logging this activity
-    private static final String logTag = "EmotionDetectActivity";
     // getExtra
     private String name = null;
 
     private Byte[] failedImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emotion_detect);
         faceClient = new FaceServiceRestClient(getString(R.string.api_end_point),
                 getString(R.string.face_subscription_key));
-        selectImageButton = (Button) findViewById(R.id.buttonSelectImage);
+        selectImageButton = findViewById(R.id.buttonSelectImage);
         // show a warning that these images are sent to microsoft web services and may be stored
         Toast.makeText(this, getString(R.string.consent_warning),
                 Toast.LENGTH_LONG).show();
@@ -81,9 +81,10 @@ public class EmotionDetectActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         name = intent.getStringExtra("name");
-        Log.e("ashu12chi",name);
+        Log.e("ashu12chi", name);
 
     }
+
     private void startDetection() {
         //disable button and create progress dialog
         selectImageButton.setEnabled(false);
@@ -101,13 +102,15 @@ public class EmotionDetectActivity extends AppCompatActivity {
             // Log.d(logTag,e.getMessage());
         }
     }
+
     public void takePictureClick(View view) {
         //go to camera helper activity to take photo and send back the image Uri
-        Intent toCameraHelper  = new Intent(EmotionDetectActivity.this,
+        Intent toCameraHelper = new Intent(EmotionDetectActivity.this,
                 CameraHelperActivity.class);
         startActivityForResult(toCameraHelper, REQUEST_TAKE_PICTURE);
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -135,12 +138,13 @@ public class EmotionDetectActivity extends AppCompatActivity {
             //deletePictures();
         }
     }
+
     private Face[] getResults() throws ClientException,
             IOException {
 
         // create byte array to send to emotion client
         ByteArrayOutputStream output = new ByteArrayOutputStream();
-        imageBitMap.compress(Bitmap.CompressFormat.JPEG, this.COMPRESSION_BIT_MAP, output);
+        imageBitMap.compress(Bitmap.CompressFormat.JPEG, COMPRESSION_BIT_MAP, output);
         ByteArrayInputStream inputStream = new ByteArrayInputStream(output.toByteArray());
 
 
@@ -155,49 +159,49 @@ public class EmotionDetectActivity extends AppCompatActivity {
         return faceClient.detect(inputStream, true, false,
                 faceAttributeTypes);
     }
-    private boolean deletePictures(){
+
+    private boolean deletePictures() {
         File file = new File(imageUri.getPath());
         return file.delete();
     }
+
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-    private void toResults(Emotion emotionResults){
+
+    private void toResults(Emotion emotionResults) {
         Intent toResults;
-        Log.e("ashu",name);
-        if(name.equals("music")) {
-            toResults = new Intent(EmotionDetectActivity.this,EmotionResultActivity.class);
-        }
-        else if(name.equals("book")){
+        Log.e("ashu", name);
+        if (name.equals("music")) {
+            toResults = new Intent(EmotionDetectActivity.this, EmotionResultActivity.class);
+        } else if (name.equals("book")) {
             toResults = new Intent(EmotionDetectActivity.this, BookActivity.class);
-        }
-        else if(name.equals("video")) {
+        } else if (name.equals("video")) {
             toResults = new Intent(EmotionDetectActivity.this, VideosActivity.class);
-        }
-        else {
+        } else {
             toResults = new Intent(EmotionDetectActivity.this, ActivityActivity.class);
         }
         //add a bundle of the ArrayLists for scores and emotions
         ArrayList<EmotionData> emotionsSorted = this.orderedEmotionsToMap(emotionResults);
         // right now the graph only displays top 4 emotions, so don't need to send more than
         // 4 elements
-        List<EmotionData> topFourEmotions = emotionsSorted.subList(0,4);
+        List<EmotionData> topFourEmotions = emotionsSorted.subList(0, 4);
         // need to use ArrayList for sending to EmotionResultActivity, cannot use as a
         // Serializable object. Using new object to prevent concurrent modification exceptions.
         ArrayList<EmotionData> topFourArrayList = new ArrayList<EmotionData>();
         topFourArrayList.addAll(topFourEmotions);
 
         // Code to save Emotion Information in Shared Preference
-        SharedPreferences sharedPreferences = getSharedPreferences("EmotionData",MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("EmotionData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString("Emotion0",topFourArrayList.get(0).getEmotion());
-        editor.putString("Emotion1",topFourArrayList.get(1).getEmotion());
-        editor.putString("Emotion2",topFourArrayList.get(2).getEmotion());
-        editor.putString("Emotion3",topFourArrayList.get(3).getEmotion());
+        editor.putString("Emotion0", topFourArrayList.get(0).getEmotion());
+        editor.putString("Emotion1", topFourArrayList.get(1).getEmotion());
+        editor.putString("Emotion2", topFourArrayList.get(2).getEmotion());
+        editor.putString("Emotion3", topFourArrayList.get(3).getEmotion());
 
         editor.putFloat("EmotionValue0", (float) topFourArrayList.get(0).getEmotionValue());
         editor.putFloat("EmotionValue1", (float) topFourArrayList.get(1).getEmotionValue());
@@ -207,17 +211,18 @@ public class EmotionDetectActivity extends AppCompatActivity {
         editor.commit();
 
         Bundle bundleToEmotionResults = new Bundle();
-        bundleToEmotionResults.putSerializable("topFourEmotions", (Serializable)topFourArrayList);
+        bundleToEmotionResults.putSerializable("topFourEmotions", topFourArrayList);
         toResults.putExtra("emotionResultsBundle", bundleToEmotionResults);
 
         this.startActivity(toResults);
     }
-    private ArrayList<EmotionData>  orderedEmotionsToMap (Emotion emotion){
+
+    private ArrayList<EmotionData> orderedEmotionsToMap(Emotion emotion) {
         ArrayList<EmotionData> emotionDataList = new ArrayList<EmotionData>();
         // get all fields in the Emotion object
         Field[] emotionFields = emotion.getClass().getDeclaredFields();
 
-        for(Field emotionField: emotionFields) {
+        for (Field emotionField : emotionFields) {
             String tempFieldName = emotionField.getName();
 
             try {
@@ -237,9 +242,11 @@ public class EmotionDetectActivity extends AppCompatActivity {
 
         return emotionDataList;
     }
+
     private class DetectEmotion extends AsyncTask<String, String, Face[]> {
         // store the exception for use onPostExecute
         Exception exception;
+
         @Override
         protected Face[] doInBackground(String... args) {
             // try and get the results, store the errors
@@ -254,6 +261,7 @@ public class EmotionDetectActivity extends AppCompatActivity {
 
             return null;
         }
+
         @Override
         protected void onPostExecute(Face[] result) {
             super.onPostExecute(result);
@@ -300,14 +308,14 @@ public class EmotionDetectActivity extends AppCompatActivity {
                             });
 
                     //finished.show();
-                    Intent toFailedImage  = new Intent(EmotionDetectActivity.this,
+                    Intent toFailedImage = new Intent(EmotionDetectActivity.this,
                             FailedImageView.class);
                     // toFailedImage.putExtra("FAILED_IMAGE",imageBitMap);
                     startActivity(toFailedImage);
                     //a successful result
                 } else if (result.length > 0) {
                     // get a ranked list of results
-                    Log.d(logTag,"found Results!");
+                    Log.d(logTag, "found Results!");
                     //emotionResults = result.get(0).scores.ToRankedList(Order.DESCENDING);
                     Emotion emotionResults = result[0].faceAttributes.emotion;
                     ArrayList<Double> emotionsOrdered = new ArrayList<Double>();

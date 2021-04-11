@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:weightSum="10"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,26 +21,26 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="160dp"
             android:layout_weight="6"
-            android:gravity= "center"
+            android:gravity="center"
             android:text="@string/title_txt"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
 
         <Button
+            android:id="@+id/buttonSelectImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/take_pic"
-            android:id="@+id/buttonSelectImage"
-            android:onClick="takePictureClick"
             android:layout_margin="20dp"
             android:layout_weight=".1"
-            android:textSize="17sp"
-            android:background="@drawable/btn_shape"/>
+            android:background="@drawable/btn_shape"
+            android:onClick="takePictureClick"
+            android:text="@string/take_pic"
+            android:textSize="17sp" />
 
         <ImageView
             android:id="@+id/imageBit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"/>
+            android:layout_weight="3" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,8 +19,8 @@ public class ImageHelper {
     private static final int IMAGE_MAX_HEIGHT = 720;
     // log tag for logging
     private static final String logTag = "ImageHelper";
-    public static Bitmap compressBitMap(Uri imageUri, ContentResolver contentResolver)
-    {
+
+    public static Bitmap compressBitMap(Uri imageUri, ContentResolver contentResolver) {
         try {
 
             InputStream imageInputStream = contentResolver.openInputStream(imageUri);
@@ -35,7 +35,7 @@ public class ImageHelper {
 
             // Calculate shrink rate when loading the image into memory.
             int maxSideLength =
-                    options.outWidth > options.outHeight ? options.outWidth: options.outHeight;
+                    options.outWidth > options.outHeight ? options.outWidth : options.outHeight;
             options.inSampleSize = 1;
             options.inSampleSize = calculateSampleSize(maxSideLength, IMAGE_MAX_WIDTH);
             options.inJustDecodeBounds = false;
@@ -48,13 +48,13 @@ public class ImageHelper {
             imageInputStream = contentResolver.openInputStream(imageUri);
             Bitmap bitmap = BitmapFactory.decodeStream(imageInputStream, outPadding, options);
             maxSideLength = bitmap.getWidth() > bitmap.getHeight()
-                    ? bitmap.getWidth(): bitmap.getHeight();
+                    ? bitmap.getWidth() : bitmap.getHeight();
             double ratio = IMAGE_MAX_WIDTH / (double) maxSideLength;
             if (ratio < 1) {
                 bitmap = Bitmap.createScaledBitmap(
                         bitmap,
-                        (int)(bitmap.getWidth() * ratio),
-                        (int)(bitmap.getHeight() * ratio),
+                        (int) (bitmap.getWidth() * ratio),
+                        (int) (bitmap.getHeight() * ratio),
                         false);
             }
 
@@ -66,19 +66,21 @@ public class ImageHelper {
         }
 
     }
-    private static int calculateSampleSize(int imgWidth, int imgHeight ) {
+
+    private static int calculateSampleSize(int imgWidth, int imgHeight) {
         int inSampleSize = 1;
         //compare half width and height to not scale down too much
-        int halfWidth  = imgWidth / 2;
+        int halfWidth = imgWidth / 2;
         int halfHeight = imgHeight / 2;
         // increase sample size until we have met our image
-        while (((halfWidth/inSampleSize) >= IMAGE_MAX_WIDTH) &&
-                ((halfHeight/inSampleSize) >= IMAGE_MAX_HEIGHT)) {
+        while (((halfWidth / inSampleSize) >= IMAGE_MAX_WIDTH) &&
+                ((halfHeight / inSampleSize) >= IMAGE_MAX_HEIGHT)) {
             //sample size should be a power of two
             inSampleSize *= 2;
         }
         return inSampleSize;
     }
+
     private static int getImageRotationAngle(InputStream imageStream) {
         int angle = 0;
         ExifInterface exif;
@@ -109,6 +111,7 @@ public class ImageHelper {
 
         return angle;
     }
+
     private static Bitmap rotateBitmap(Bitmap bitmap, int angle) {
 
         if (angle != 0) {

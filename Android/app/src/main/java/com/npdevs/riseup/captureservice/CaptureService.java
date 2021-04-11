@@ -21,6 +21,9 @@ public class CaptureService extends Service {
     final private String CHANNEL_ID = "ForegroundServiceChannel";
     private BroadcastReceiver br;
 
+    public CaptureService() {
+    }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         createNotificationChannel();
@@ -40,9 +43,6 @@ public class CaptureService extends Service {
         startForeground(1, notification);
 
         return super.onStartCommand(intent, flags, startId);
-    }
-
-    public CaptureService() {
     }
 
     @Override

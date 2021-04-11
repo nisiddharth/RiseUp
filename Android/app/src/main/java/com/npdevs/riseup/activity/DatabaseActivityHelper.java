@@ -34,10 +34,7 @@ public class DatabaseActivityHelper extends SQLiteOpenHelper {
         contentValues.put(COL_2, name);
         contentValues.put(COL_3, type);
         long result = db.insert(TABLE_NAME, null, contentValues);
-        if (result == -1)
-            return false;
-        else
-            return true;
+        return result != -1;
     }
 
     public Cursor getAllData() {

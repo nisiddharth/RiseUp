@@ -1,81 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/bkname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="60dp"
         android:text="Book Name"
         android:textColor="@color/black"
-        android:id="@+id/bkname"
         android:textSize="25dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="20dp"
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/authnm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/bkname"
+        android:layout_alignStart="@+id/bkname"
+        android:layout_alignLeft="@+id/bkname"
+        android:layout_marginTop="52dp"
         android:text="Author"
         android:textColor="@color/black"
         android:textSize="20dp"
-        android:id="@+id/authnm"
-        android:textStyle="italic"
-        android:layout_below="@+id/bkname"
-        android:layout_alignLeft="@+id/bkname"
-        android:layout_alignStart="@+id/bkname"
-        android:layout_marginTop="52dp" />
+        android:textStyle="italic" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Amazon: "
-        android:textColor="@color/black"
         android:id="@+id/amznLink"
-        android:layout_marginTop="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/authnm"
+        android:layout_alignStart="@+id/authnm"
         android:layout_alignLeft="@+id/authnm"
-        android:layout_alignStart="@+id/authnm" />
+        android:layout_marginTop="80dp"
+        android:text="Amazon: "
+        android:textColor="@color/black" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GoodReads: "
         android:id="@+id/gdrLink"
-        android:layout_marginTop="141dp"
-        android:textColor="@color/black"
-        android:layout_below="@+id/amznLink"
-        android:layout_alignLeft="@+id/amznLink"
-        android:layout_alignStart="@+id/amznLink" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:layout_below="@+id/amznLink"
+        android:layout_alignStart="@+id/amznLink"
+        android:layout_alignLeft="@+id/amznLink"
+        android:layout_marginTop="141dp"
+        android:text="GoodReads: "
+        android:textColor="@color/black" />
+
+    <TextView
         android:id="@+id/amlink"
-        android:autoLink="web"
-        android:textColor="@color/dark_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/gdlink"
+        android:layout_alignTop="@+id/amznLink"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_toRightOf="@+id/amznLink"
-        android:layout_alignTop="@+id/amznLink"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/gdlink" />
+        android:autoLink="web"
+        android:text="New Text"
+        android:textColor="@color/dark_red" />
 
     <TextView
+        android:id="@+id/gdlink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/gdlink"
-        android:textColor="@color/dark_red"
-        android:layout_marginRight="10dp"
-        android:autoLink="web"
-        android:layout_toRightOf="@+id/gdrLink"
         android:layout_alignTop="@+id/gdrLink"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@+id/gdrLink"
+        android:autoLink="web"
+        android:text="New Text"
+        android:textColor="@color/dark_red" />
 
 </RelativeLayout>

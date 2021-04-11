@@ -17,12 +17,9 @@ import com.npdevs.riseup.BuildConfig;
 public class FaceCropper {
 
     private static final String LOG_TAG = FaceCropper.class.getSimpleName();
-
-    public enum SizeMode { FaceMarginPx, EyeDistanceFactorMargin };
-
     private static final int MAX_FACES = 8;
-    private static final int MIN_FACE_SIZE = 200;
 
+    private static final int MIN_FACE_SIZE = 200;
     private int mFaceMinSize = MIN_FACE_SIZE;
     private int mFaceMarginPx = 100;
     private float mEyeDistanceFactorMargin = 2f;
@@ -31,7 +28,6 @@ public class FaceCropper {
     private boolean mDebug;
     private Paint mDebugPainter;
     private Paint mDebugAreaPainter;
-
     public FaceCropper() {
         initPaints();
     }
@@ -147,8 +143,7 @@ public class FaceCropper {
 
             if (SizeMode.FaceMarginPx.equals(mSizeMode)) {
                 faceSize += mFaceMarginPx * 2; // *2 for top and down/right and left effect
-            }
-            else if (SizeMode.EyeDistanceFactorMargin.equals(mSizeMode)) {
+            } else if (SizeMode.EyeDistanceFactorMargin.equals(mSizeMode)) {
                 faceSize += face.eyesDistance() * mEyeDistanceFactorMargin;
             }
 
@@ -247,6 +242,8 @@ public class FaceCropper {
 
         return croppedBitmap;
     }
+
+    public enum SizeMode {FaceMarginPx, EyeDistanceFactorMargin}
 
     protected class CropResult {
         Bitmap mBitmap;

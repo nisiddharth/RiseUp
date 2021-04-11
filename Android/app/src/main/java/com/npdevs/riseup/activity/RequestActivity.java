@@ -1,13 +1,5 @@
 package com.npdevs.riseup.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import retrofit2.Call;
-import retrofit2.Callback;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +8,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.google.gson.Gson;
-import com.npdevs.riseup.R;
 import com.npdevs.riseup.api.responseModels.Response;
 import com.npdevs.riseup.api.responseModels.user.GetFriendsResponse;
 import com.npdevs.riseup.api.retrofit.RetrofitClient;
@@ -29,6 +26,9 @@ import com.npdevs.riseup.utils.SharedPrefs;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class RequestActivity extends AppCompatActivity {
     ActivityRequestBinding binding;
@@ -120,21 +120,6 @@ public class RequestActivity extends AppCompatActivity {
             return requests.size();
         }
 
-        private class ViewHolder extends RecyclerView.ViewHolder {
-            TextView name, email, phone;
-            Button accept;
-            ProgressBar progressBar;
-
-            public ViewHolder(@NonNull View itemView) {
-                super(itemView);
-                name = binding.name;
-                email = binding.email;
-                phone = binding.phone;
-                accept = binding.accept;
-                progressBar = binding.progress;
-            }
-        }
-
         private void onAcceptLoad(ViewHolder holder) {
             holder.progressBar.setVisibility(View.VISIBLE);
             holder.accept.setVisibility(View.GONE);
@@ -161,6 +146,21 @@ public class RequestActivity extends AppCompatActivity {
 
                 }
             });
+        }
+
+        private class ViewHolder extends RecyclerView.ViewHolder {
+            TextView name, email, phone;
+            Button accept;
+            ProgressBar progressBar;
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                name = binding.name;
+                email = binding.email;
+                phone = binding.phone;
+                accept = binding.accept;
+                progressBar = binding.progress;
+            }
         }
     }
 }

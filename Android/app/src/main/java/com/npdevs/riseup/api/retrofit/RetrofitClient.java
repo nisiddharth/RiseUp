@@ -24,6 +24,7 @@ public class RetrofitClient {
         }
         return apiInterface;
     }
+
     private static OkHttpClient getHttpClient() {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();

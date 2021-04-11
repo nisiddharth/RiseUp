@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,7 +22,6 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.npdevs.riseup.LoginActivity;
 import com.npdevs.riseup.R;
 import com.npdevs.riseup.SettingsActivity;
 import com.npdevs.riseup.helper.EmotionData;
@@ -33,11 +31,11 @@ import java.util.Random;
 
 public class BookActivity extends AppCompatActivity {
 
-    ArrayList<String> moodArr;
+    private final static int TOP_EMOTION = 0;
     public ListView lview;
+    ArrayList<String> moodArr;
     private BookListAdapter bookListAdapter;
     private ArrayList<EmotionData> topFourEmotionsList;
-    private final static int TOP_EMOTION = 0;
     //public TextView bknm;
 
     @Override
@@ -46,13 +44,13 @@ public class BookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book);
 
         Bundle extras = getIntent().getExtras();
-        Log.e("ashu12_chi",extras.toString());
+        Log.e("ashu12_chi", extras.toString());
         if (extras != null) {
             // TODO make these values string constants in here and emotion detect
             Bundle fromEmotionDetectBundle = extras.getBundle("emotionResultsBundle");
             topFourEmotionsList = (ArrayList<EmotionData>)
                     fromEmotionDetectBundle.getSerializable("topFourEmotions");
-            Log.e("ashu12_chi",topFourEmotionsList.toString());
+            Log.e("ashu12_chi", topFourEmotionsList.toString());
         } else {
             Toast.makeText(this, "Cannot display graph results", Toast.LENGTH_LONG).show();
             // Log.d("EmotionResultActivity",getString(R.string.null_result_bundles));
@@ -60,7 +58,7 @@ public class BookActivity extends AppCompatActivity {
 
         if (topFourEmotionsList != null) {
             // create a new Horizontal Bar Chart
-            HorizontalBarChart chart = (HorizontalBarChart) findViewById(R.id.chart);
+            HorizontalBarChart chart = findViewById(R.id.chart);
             // get the chart data from the helper method getDataSet()
             BarData data = new BarData(getDataSet());
             data.setBarWidth(.25f);
@@ -91,7 +89,7 @@ public class BookActivity extends AppCompatActivity {
             // refresh the chart
             chart.invalidate();
             // set the Title TextView for the top emotion found
-            TextView playListTitle = (TextView) findViewById(R.id.playlist_title);
+            TextView playListTitle = findViewById(R.id.playlist_title);
             playListTitle.setText(getString(R.string.result_title_booklist,
                     topFourEmotionsList.get(TOP_EMOTION).getEmotion()));
             // set the WebView for the top emotion's playlist
@@ -106,7 +104,7 @@ public class BookActivity extends AppCompatActivity {
         toolbar.setTitle("Recommendations");
 
         //bknm = (TextView) findViewById(R.id.moodTV);
-        lview = (ListView) findViewById(R.id.bklist);
+        lview = findViewById(R.id.bklist);
         moodArr = new ArrayList<>();
         String[] moods = {"Over a cup of coffee", "Raining cats & dogs", "Stress Buster", "Dozing Off", "Travel Diaries", "Addicted", "Keep it simple, silly!", "Summer is here"};
         String selectedMood = moods[(new Random()).nextInt(8)];
@@ -189,7 +187,8 @@ public class BookActivity extends AppCompatActivity {
         BookActivity.this.finish();
 
     }
-    private ArrayList<IBarDataSet> getDataSet () {
+
+    private ArrayList<IBarDataSet> getDataSet() {
         ArrayList<IBarDataSet> dataSets = new ArrayList<>();
 
         ArrayList<BarEntry> emotion0 = new ArrayList<>();

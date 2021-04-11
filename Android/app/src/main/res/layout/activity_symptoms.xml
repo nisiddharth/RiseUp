@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
 
     android:stretchColumns="1">
-    <View
-        android:layout_height="10dip"
-        />
+
+    <View android:layout_height="10dip" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,9 +19,9 @@
 
         android:textSize="15sp"
         android:textStyle="bold" />
-    <View
-        android:layout_height="4dip"
-        />
+
+    <View android:layout_height="4dip" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,11 +31,10 @@
         android:textAlignment="center"
         android:textColor="#000"
 
-        android:textSize="13sp"
-        />
-    <View
-        android:layout_height="15dip"
-        />
+        android:textSize="13sp" />
+
+    <View android:layout_height="15dip" />
+
     <TableRow>
 
         <TextView
@@ -71,6 +69,7 @@
             android:layout_column="0"
             android:padding="1dip"
             android:text="" />
+
         <TextView
             android:layout_column="1"
 
@@ -87,9 +86,9 @@
             android:textAlignment="viewStart"
             android:textColor="#000" />
     </TableRow>
-    <View
-        android:layout_height="4dip"
-        />
+
+    <View android:layout_height="4dip" />
+
     <View
         android:layout_height="1dip"
         android:background="#FF909090" />
@@ -146,9 +145,9 @@
             android:textAlignment="viewStart"
             android:textColor="#000" />
     </TableRow>
-    <View
-        android:layout_height="4dip"
-        />
+
+    <View android:layout_height="4dip" />
+
     <View
         android:layout_height="1dip"
         android:background="#FF909090" />
@@ -205,9 +204,9 @@
             android:textAlignment="viewStart"
             android:textColor="#000" />
     </TableRow>
-    <View
-        android:layout_height="4dip"
-        />
+
+    <View android:layout_height="4dip" />
+
     <View
         android:layout_height="1dip"
         android:background="#FF909090" />
@@ -264,9 +263,9 @@
             android:textAlignment="viewStart"
             android:textColor="#000" />
     </TableRow>
-    <View
-        android:layout_height="4dip"
-        />
+
+    <View android:layout_height="4dip" />
+
     <View
         android:layout_height="1dip"
         android:background="#FF909090" />
@@ -323,9 +322,9 @@
             android:textAlignment="viewStart"
             android:textColor="#000" />
     </TableRow>
-    <View
-        android:layout_height="4dip"
-        />
+
+    <View android:layout_height="4dip" />
+
     <View
         android:layout_height="1dip"
         android:background="#FF909090" />
@@ -382,9 +381,9 @@
             android:textAlignment="viewStart"
             android:textColor="#000" />
     </TableRow>
-    <View
-        android:layout_height="4dip"
-        />
+
+    <View android:layout_height="4dip" />
+
     <View
         android:layout_height="1dip"
         android:background="#FF909090" />
@@ -441,9 +440,9 @@
             android:textAlignment="viewStart"
             android:textColor="#000" />
     </TableRow>
-    <View
-        android:layout_height="4dip"
-        />
+
+    <View android:layout_height="4dip" />
+
     <View
         android:layout_height="1dip"
         android:background="#FF909090" />
@@ -500,9 +499,9 @@
             android:textAlignment="viewStart"
             android:textColor="#000" />
     </TableRow>
-    <View
-        android:layout_height="4dip"
-        />
+
+    <View android:layout_height="4dip" />
+
     <View
         android:layout_height="1dip"
         android:background="#FF909090" />
@@ -559,9 +558,9 @@
             android:textAlignment="viewStart"
             android:textColor="#000" />
     </TableRow>
-    <View
-        android:layout_height="4dip"
-        />
+
+    <View android:layout_height="4dip" />
+
     <View
         android:layout_height="1dip"
         android:background="#FF909090" />
@@ -618,9 +617,9 @@
             android:textAlignment="viewStart"
             android:textColor="#000" />
     </TableRow>
-    <View
-        android:layout_height="4dip"
-        />
+
+    <View android:layout_height="4dip" />
+
     <View
         android:layout_height="1dip"
         android:background="#FF909090" />

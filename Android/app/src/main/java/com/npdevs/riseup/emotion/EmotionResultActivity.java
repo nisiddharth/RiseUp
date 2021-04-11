@@ -1,7 +1,5 @@
 package com.npdevs.riseup.emotion;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +12,8 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -25,14 +25,15 @@ import com.npdevs.riseup.helper.EmotionData;
 import java.util.ArrayList;
 
 public class EmotionResultActivity extends AppCompatActivity {
+    // the index where the top emotion is
+    private final static int TOP_EMOTION = 0;
     // top four emotions from our detect activity.
     private ArrayList<EmotionData> topFourEmotionsList;
     // the WebView which will hold our playlists
     private WebView playListView;
-    // the index where the top emotion is
-    private final static int TOP_EMOTION = 0;
     //the url of the top emotion playlist
     private String topEmotionPlaylistURL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,7 @@ public class EmotionResultActivity extends AppCompatActivity {
         }
         if (topFourEmotionsList != null) {
             // create a new Horizontal Bar Chart
-            HorizontalBarChart chart = (HorizontalBarChart) findViewById(R.id.chart);
+            HorizontalBarChart chart = findViewById(R.id.chart);
             // get the chart data from the helper method getDataSet()
             BarData data = new BarData(getDataSet());
             data.setBarWidth(.25f);
@@ -83,11 +84,11 @@ public class EmotionResultActivity extends AppCompatActivity {
             // refresh the chart
             chart.invalidate();
             // set the Title TextView for the top emotion found
-            TextView playListTitle = (TextView) findViewById(R.id.playlist_title);
+            TextView playListTitle = findViewById(R.id.playlist_title);
             playListTitle.setText(getString(R.string.result_title_playlist,
                     topFourEmotionsList.get(TOP_EMOTION).getEmotion()));
             // set the WebView for the top emotion's playlist
-            playListView = (WebView) findViewById(R.id.web_playlist);
+            playListView = findViewById(R.id.web_playlist);
             this.setPlayListWebView(topFourEmotionsList.get(TOP_EMOTION).getEmotion());
         }
         //display errors, although they are not likely to happen at this point
@@ -97,7 +98,8 @@ public class EmotionResultActivity extends AppCompatActivity {
         }
 
     }
-    private ArrayList<IBarDataSet> getDataSet () {
+
+    private ArrayList<IBarDataSet> getDataSet() {
         ArrayList<IBarDataSet> dataSets = new ArrayList<>();
 
         ArrayList<BarEntry> emotion0 = new ArrayList<>();
@@ -140,7 +142,8 @@ public class EmotionResultActivity extends AppCompatActivity {
 
         return dataSets;
     }
-    private void setPlayListWebView (String emotion){
+
+    private void setPlayListWebView(String emotion) {
         // javascript is required for the playlist to display
         playListView.getSettings().setJavaScriptEnabled(true);
         playListView.setWebViewClient(new WebViewClient() {
@@ -148,10 +151,12 @@ public class EmotionResultActivity extends AppCompatActivity {
 
             //the loading dialog to be displayed with page is loading.
             ProgressDialog loadingDialog = new ProgressDialog(EmotionResultActivity.this);
+
             @Override
             public void onPageFinished(WebView view, String url) {
                 loadingDialog.dismiss();
             }
+
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -159,9 +164,10 @@ public class EmotionResultActivity extends AppCompatActivity {
                 loadingDialog.setMessage("Loading...");
                 loadingDialog.show();
             }
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                if (request.getUrl()  != null && request.getUrl().toString().
+                if (request.getUrl() != null && request.getUrl().toString().
                         startsWith("market://")) {
                     view.getContext().startActivity(
                             new Intent(Intent.ACTION_VIEW, Uri.parse(topEmotionPlaylistURL)));
@@ -199,7 +205,6 @@ public class EmotionResultActivity extends AppCompatActivity {
         }
 
     }
-
 
 
 }

@@ -99,7 +99,7 @@ public class FrontActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
-        if(id == R.id.action_requests){
+        if (id == R.id.action_requests) {
             Intent i = new Intent(this, RequestActivity.class);
             startActivity(i);
             return true;

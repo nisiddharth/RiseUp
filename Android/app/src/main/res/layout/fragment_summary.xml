@@ -1,111 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipe_to_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <RelativeLayout
-        android:layout_marginHorizontal="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".tabs.SummaryFragment">
 
-        <TextView
-            android:id="@+id/heading"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:layout_weight="1"
-            android:text="Today's summary"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:orientation="vertical"
+            tools:context=".tabs.SummaryFragment">
 
-        <TextView
-            android:id="@+id/summarytext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/heading"
-            android:layout_marginVertical="10dp"
-            android:layout_weight="1"
-            android:text="You are doing good!"
-            android:textAlignment="center"
-            android:textColor="@color/dark_green"
-            android:textStyle="bold" />
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/chart1"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_below="@+id/summarytext" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/chart1"
-            android:id="@+id/messageTap"
-            android:textAlignment="center"
-            android:shadowDx="10"
-            android:outlineAmbientShadowColor="@color/dark_green"
-            android:text="Mental wellbeing is important\nTap here to know more about some symptoms to be watchful about."/>
-
-        <TextView
-            android:id="@+id/headingpast"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginVertical="10dp"
-            android:layout_weight="1"
-            android:text="Past summary"
-            android:layout_below="@id/messageTap"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/switches"
-            android:layout_below="@id/headingpast">
-            <Button
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/previous_date"
-                android:text="← Previous" />
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:id="@+id/date"
-                android:textColor="@color/black"
+                android:text="Today's summary"
                 android:textAlignment="center"
-                android:text="Date" />
-            <Button
-                android:layout_width="120dp"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/summarytext"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/next_date"
-                android:text="Next ➝" />
-        </LinearLayout>
+                android:layout_below="@id/heading"
+                android:layout_marginVertical="10dp"
+                android:layout_weight="1"
+                android:text="You are doing good!"
+                android:textAlignment="center"
+                android:textColor="@color/dark_green"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/summarytextpast"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/switches"
-            android:layout_marginVertical="10dp"
-            android:layout_weight="1"
-            android:text="You are doing good"
-            android:textAlignment="center"
-            android:textColor="@color/dark_green"
-            android:textStyle="bold" />
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chart1"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_below="@+id/summarytext" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/messageTap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/chart1"
+                android:outlineAmbientShadowColor="@color/dark_green"
+                android:shadowDx="10"
+                android:text="Mental wellbeing is important\nTap here to know more about some symptoms to be watchful about."
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/headingpast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/messageTap"
+                android:layout_marginVertical="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:text="Past summary"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/switches"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/headingpast">
+
+                <Button
+                    android:id="@+id/previous_date"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="← Previous" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Date"
+                    android:textAlignment="center"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/next_date"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="Next ➝" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/summarytextpast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/switches"
+                android:layout_marginVertical="10dp"
+                android:layout_weight="1"
+                android:text="You are doing good"
+                android:textAlignment="center"
+                android:textColor="@color/dark_green"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
     </ScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -21,6 +21,7 @@ import com.npdevs.riseup.helper.EmotionData;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 public class SuggestionsFragment extends Fragment {
 
     private CardView musicCardView;
@@ -53,7 +54,7 @@ public class SuggestionsFragment extends Fragment {
                     topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion2", null), sharedPreferences.getFloat("EmotionValue2", 0)));
                     topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion3", null), sharedPreferences.getFloat("EmotionValue3", 0)));
                     Bundle bundleToEmotionResults = new Bundle();
-                    bundleToEmotionResults.putSerializable("topFourEmotions", (Serializable) topFourArrayList);
+                    bundleToEmotionResults.putSerializable("topFourEmotions", topFourArrayList);
                     toResults.putExtra("emotionResultsBundle", bundleToEmotionResults);
                     startActivity(toResults);
                 }
@@ -77,7 +78,7 @@ public class SuggestionsFragment extends Fragment {
                     topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion2", null), sharedPreferences.getFloat("EmotionValue2", 0)));
                     topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion3", null), sharedPreferences.getFloat("EmotionValue3", 0)));
                     Bundle bundleToEmotionResults = new Bundle();
-                    bundleToEmotionResults.putSerializable("topFourEmotions", (Serializable) topFourArrayList);
+                    bundleToEmotionResults.putSerializable("topFourEmotions", topFourArrayList);
                     toResults.putExtra("emotionResultsBundle", bundleToEmotionResults);
                     startActivity(toResults);
                 }
@@ -99,7 +100,7 @@ public class SuggestionsFragment extends Fragment {
                 topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion2", null), sharedPreferences.getFloat("EmotionValue2", 0)));
                 topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion3", null), sharedPreferences.getFloat("EmotionValue3", 0)));
                 Bundle bundleToEmotionResults = new Bundle();
-                bundleToEmotionResults.putSerializable("topFourEmotions", (Serializable) topFourArrayList);
+                bundleToEmotionResults.putSerializable("topFourEmotions", topFourArrayList);
                 toResults.putExtra("emotionResultsBundle", bundleToEmotionResults);
                 startActivity(toResults);
             }
@@ -121,13 +122,12 @@ public class SuggestionsFragment extends Fragment {
                     topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion2", null), sharedPreferences.getFloat("EmotionValue2", 0)));
                     topFourArrayList.add(new EmotionData(sharedPreferences.getString("Emotion3", null), sharedPreferences.getFloat("EmotionValue3", 0)));
                     Bundle bundleToEmotionResults = new Bundle();
-                    bundleToEmotionResults.putSerializable("topFourEmotions", (Serializable) topFourArrayList);
+                    bundleToEmotionResults.putSerializable("topFourEmotions", topFourArrayList);
                     toResults.putExtra("emotionResultsBundle", bundleToEmotionResults);
                     startActivity(toResults);
                 }
             }
         });
-
 
 
         return view;

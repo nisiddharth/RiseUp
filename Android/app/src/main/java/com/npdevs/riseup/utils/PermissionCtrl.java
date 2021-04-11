@@ -13,7 +13,7 @@ public class PermissionCtrl {
     Context context;
 
     int STORAGE_WRITE_REQUEST_CODE = 100, STORAGE_READ_REQUEST_CODE = 101, ACCESS_NETWORK_STATE_CODE = 102, CAMERA_REQUEST_CODE = 103,
-        ALL_PERMISSION_REQUEST_CODE = 104;
+            ALL_PERMISSION_REQUEST_CODE = 104;
 
     public PermissionCtrl(Context context) {
         this.context = context;

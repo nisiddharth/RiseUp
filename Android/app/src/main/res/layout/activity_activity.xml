@@ -15,28 +15,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="@string/result_title_chart"
             android:gravity="center"
-            android:textSize="20sp"
-            />
+            android:text="@string/result_title_chart"
+            android:textSize="20sp" />
+
         <com.github.mikephil.charting.charts.HorizontalBarChart
             android:id="@+id/chart"
-            android:layout_height="0dp"
             android:layout_width="match_parent"
-            android:layout_weight="4"/>
+            android:layout_height="0dp"
+            android:layout_weight="4" />
+
         <TextView
+            android:id="@+id/playlist_title"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:id="@+id/playlist_title"
             android:layout_weight="1"
-            android:text="Books for top mood"
             android:gravity="center"
-            android:textSize="15sp"
-            />
+            android:text="Books for top mood"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/editTextTextMultiLine"
@@ -44,7 +45,7 @@
             android:layout_height="0dp"
             android:layout_weight="4"
             android:ems="10"
-            android:textColor="@color/black"
-            android:gravity="start|top"/>
+            android:gravity="start|top"
+            android:textColor="@color/black" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,17 +8,19 @@ public class EmotionData implements Comparable<EmotionData>, Serializable {
     private String emotion;
     private double emotionValue;
 
-    public EmotionData(String emotion, double emotionValue){
+    public EmotionData(String emotion, double emotionValue) {
         this.emotion = emotion;
         this.emotionValue = emotionValue;
     }
 
-    public String getEmotion(){
+    public String getEmotion() {
         return this.emotion;
     }
-    public double getEmotionValue(){
+
+    public double getEmotionValue() {
         return this.emotionValue;
     }
+
     @Override
     public int compareTo(EmotionData emotionData) {
         // sort results by descending emotion value

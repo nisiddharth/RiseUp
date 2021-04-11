@@ -14,9 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.npdevs.riseup.R;
@@ -32,13 +29,18 @@ import com.npdevs.riseup.utils.SharedPrefs;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class FriendsFragment extends Fragment {
     FragmentFriendsBinding binding;
+    List<UserMeta> data = new ArrayList<>();
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
-    List<UserMeta> data = new ArrayList<>();
     private SharedPrefs prefs;
     private Context context;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,21 +70,21 @@ public class FriendsFragment extends Fragment {
         return view;
     }
 
-    private void onStartLoad(){
+    private void onStartLoad() {
         swipeRefreshLayout.setRefreshing(true);
     }
 
-    private void onCompleteLoad(){
+    private void onCompleteLoad() {
         swipeRefreshLayout.setRefreshing(false);
     }
 
-    private void loadData(){
+    private void loadData() {
         onStartLoad();
         RetrofitClient.getClient().getFriends(prefs.getToken()).enqueue(new Callback<GetFriendsResponse>() {
             @Override
             public void onResponse(Call<GetFriendsResponse> call, Response<GetFriendsResponse> response) {
                 onCompleteLoad();
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     data = response.body().getFriends();
                     setUpRecyclerView();
                 }
@@ -95,7 +97,7 @@ public class FriendsFragment extends Fragment {
         });
     }
 
-    private void setUpRecyclerView (){
+    private void setUpRecyclerView() {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -106,26 +108,6 @@ public class FriendsFragment extends Fragment {
     private class MainAdapter extends RecyclerView.Adapter<FriendsFragment.MainAdapter.ViewHolder> {
         private List<UserMeta> samples;
         private RecyclerFriendsBinding binding;
-        class ViewHolder extends RecyclerView.ViewHolder {
-            private TextView name, email, phone;
-            public ViewHolder(@NonNull View itemView) {
-                super(itemView);
-                name= binding.name;
-                email = binding.email;
-                phone = binding.phone;
-
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(getActivity(), ProfileActivity.class);
-                        intent.putExtra("id",samples.get(getAdapterPosition()).getId());
-                        intent.putExtra("name", samples.get(getAdapterPosition()).getName());
-                        startActivity(intent);
-                        getActivity().finish();
-                    }
-                });
-            }
-        }
 
         MainAdapter(List<UserMeta> samples) {
             this.samples = samples;
@@ -149,6 +131,28 @@ public class FriendsFragment extends Fragment {
         @Override
         public int getItemCount() {
             return samples.size();
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder {
+            private TextView name, email, phone;
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                name = binding.name;
+                email = binding.email;
+                phone = binding.phone;
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                        intent.putExtra("id", samples.get(getAdapterPosition()).getId());
+                        intent.putExtra("name", samples.get(getAdapterPosition()).getName());
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                });
+            }
         }
     }
 }

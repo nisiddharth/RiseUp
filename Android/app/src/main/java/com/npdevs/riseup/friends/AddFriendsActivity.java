@@ -1,26 +1,23 @@
 package com.npdevs.riseup.friends;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-import retrofit2.Call;
-import retrofit2.Callback;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.gson.Gson;
-import com.npdevs.riseup.R;
 import com.npdevs.riseup.api.responseModels.Response;
 import com.npdevs.riseup.api.retrofit.RetrofitClient;
 import com.npdevs.riseup.databinding.ActivityAddFriendsBinding;
 import com.npdevs.riseup.utils.SharedPrefs;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class AddFriendsActivity extends AppCompatActivity {
     ActivityAddFriendsBinding binding;
@@ -51,13 +48,13 @@ public class AddFriendsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                 toggleProgress();
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     Gson gson = new Gson();
                     Response errorResponse = gson.fromJson(response.errorBody().charStream(), Response.class);
                     Toast.makeText(AddFriendsActivity.this, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Toast.makeText(AddFriendsActivity.this,  response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddFriendsActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
             }
 
             @Override

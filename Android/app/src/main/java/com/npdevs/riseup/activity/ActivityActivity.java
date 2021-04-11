@@ -4,7 +4,6 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,8 +22,8 @@ import java.util.ArrayList;
 
 public class ActivityActivity extends AppCompatActivity {
 
-    private ArrayList<EmotionData> topFourEmotionsList;
     private final static int TOP_EMOTION = 0;
+    private ArrayList<EmotionData> topFourEmotionsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +33,13 @@ public class ActivityActivity extends AppCompatActivity {
         actionBar.setTitle("Activities");
 
         Bundle extras = getIntent().getExtras();
-        Log.e("ashu12_chi",extras.toString());
+        Log.e("ashu12_chi", extras.toString());
         if (extras != null) {
             // TODO make these values string constants in here and emotion detect
             Bundle fromEmotionDetectBundle = extras.getBundle("emotionResultsBundle");
             topFourEmotionsList = (ArrayList<EmotionData>)
                     fromEmotionDetectBundle.getSerializable("topFourEmotions");
-            Log.e("ashu12_chi",topFourEmotionsList.toString());
+            Log.e("ashu12_chi", topFourEmotionsList.toString());
         } else {
             Toast.makeText(this, "Cannot display graph results", Toast.LENGTH_LONG).show();
             // Log.d("EmotionResultActivity",getString(R.string.null_result_bundles));
@@ -48,7 +47,7 @@ public class ActivityActivity extends AppCompatActivity {
 
         if (topFourEmotionsList != null) {
             // create a new Horizontal Bar Chart
-            HorizontalBarChart chart = (HorizontalBarChart) findViewById(R.id.chart);
+            HorizontalBarChart chart = findViewById(R.id.chart);
             // get the chart data from the helper method getDataSet()
             BarData data = new BarData(getDataSet());
             data.setBarWidth(.25f);
@@ -79,7 +78,7 @@ public class ActivityActivity extends AppCompatActivity {
             // refresh the chart
             chart.invalidate();
             // set the Title TextView for the top emotion found
-            TextView playListTitle = (TextView) findViewById(R.id.playlist_title);
+            TextView playListTitle = findViewById(R.id.playlist_title);
             playListTitle.setText(getString(R.string.result_title_activitylist,
                     topFourEmotionsList.get(TOP_EMOTION).getEmotion()));
             // set the WebView for the top emotion's playlist
@@ -93,13 +92,11 @@ public class ActivityActivity extends AppCompatActivity {
         DatabaseActivityHelper databaseActivityHelper = new DatabaseActivityHelper(this);
         String emotion = topFourEmotionsList.get(TOP_EMOTION).getEmotion();
         Cursor data;
-        if(emotion.equals("happiness") || emotion.equals(("surprise"))) {
+        if (emotion.equals("happiness") || emotion.equals(("surprise"))) {
             data = databaseActivityHelper.getProductiveData();
-        }
-        else if(emotion.equals("neutral")) {
+        } else if (emotion.equals("neutral")) {
             data = databaseActivityHelper.getLearningData();
-        }
-        else {
+        } else {
             data = databaseActivityHelper.getLeisureData();
         }
         TextView editText = findViewById(R.id.editTextTextMultiLine);
@@ -111,7 +108,8 @@ public class ActivityActivity extends AppCompatActivity {
         }
         editText.setText(activities);
     }
-    private ArrayList<IBarDataSet> getDataSet () {
+
+    private ArrayList<IBarDataSet> getDataSet() {
         ArrayList<IBarDataSet> dataSets = new ArrayList<>();
 
         ArrayList<BarEntry> emotion0 = new ArrayList<>();

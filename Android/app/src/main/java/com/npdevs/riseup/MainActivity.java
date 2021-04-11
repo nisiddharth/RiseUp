@@ -1,16 +1,17 @@
 package com.npdevs.riseup;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.npdevs.riseup.utils.SharedPrefs;
 
 public class MainActivity extends AppCompatActivity {
     private SharedPrefs prefs;
     private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

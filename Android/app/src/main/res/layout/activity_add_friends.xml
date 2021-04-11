@@ -36,15 +36,15 @@
         app:layout_constraintTop_toBottomOf="@id/layoutemail" />
 
     <ProgressBar
-        android:visibility="gone"
-        tools:visibility="visible"
         android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_friend" />
+        app:layout_constraintTop_toBottomOf="@+id/add_friend"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

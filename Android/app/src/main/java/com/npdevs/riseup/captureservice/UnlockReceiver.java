@@ -25,7 +25,6 @@ import com.npdevs.riseup.utils.SharedPrefs;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -40,8 +39,8 @@ import retrofit2.Response;
 public class UnlockReceiver extends BroadcastReceiver {
 
     private static final String TAG = "MyBroadcastReceiver";
-    private static HiddenCam hiddenCam;
     static boolean done = false;
+    private static HiddenCam hiddenCam;
 
     @Override
     public void onReceive(final Context context, Intent intent) {
@@ -56,7 +55,7 @@ public class UnlockReceiver extends BroadcastReceiver {
         if (hiddenCam != null) {
             hiddenCam.stop();
         }
-            hiddenCam = new HiddenCam(context, new File(system_picture_directory), new OnImageCapturedListener() {
+        hiddenCam = new HiddenCam(context, new File(system_picture_directory), new OnImageCapturedListener() {
             @Override
             public void onImageCaptured(File file) {
 //                Toast.makeText(context, "Done", Toast.LENGTH_SHORT).show();
@@ -148,10 +147,10 @@ public class UnlockReceiver extends BroadcastReceiver {
 
         body.put("emotions", new ArrayList<>(Arrays.asList(
                 new ArrayList<String>(Arrays.asList(String.valueOf(date.getTime()), label)))));
-        RetrofitClient.getClient().saveEmotion(prefs.getToken(),body).enqueue(new Callback<SaveEmotionResponse>() {
+        RetrofitClient.getClient().saveEmotion(prefs.getToken(), body).enqueue(new Callback<SaveEmotionResponse>() {
             @Override
             public void onResponse(Call<SaveEmotionResponse> call, Response<SaveEmotionResponse> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     Gson gson = new Gson();
                     SaveEmotionResponse errorResponse = gson.fromJson(response.errorBody().charStream(), SaveEmotionResponse.class);
                     Toast.makeText(context, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();

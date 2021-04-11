@@ -1,8 +1,5 @@
 package com.npdevs.riseup.books;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,16 +8,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.npdevs.riseup.LoginActivity;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.npdevs.riseup.R;
 import com.npdevs.riseup.SettingsActivity;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -38,10 +34,10 @@ public class DetailsActivity extends AppCompatActivity {
         ActionBar toolbar = getSupportActionBar();
         toolbar.setTitle("Book details");
 
-        bkname = (TextView)findViewById(R.id.bkname);
-        authornm = (TextView)findViewById(R.id.authnm);
-        link1 = (TextView)findViewById(R.id.amlink);
-        link2 = (TextView)findViewById(R.id.gdlink);
+        bkname = findViewById(R.id.bkname);
+        authornm = findViewById(R.id.authnm);
+        link1 = findViewById(R.id.amlink);
+        link2 = findViewById(R.id.gdlink);
 
         Bundle b = getIntent().getExtras();
         selectedBook = b.getString("selected");
@@ -49,13 +45,13 @@ public class DetailsActivity extends AppCompatActivity {
 
         try {
             Log.w("DetailsActivity", "showing book details");
-            BookDB bookdb = new BookDB((Context)this);
+            BookDB bookdb = new BookDB(this);
 
             bookdb.copyDB();
             SQLiteDatabase bkdb = bookdb.openDB();
             bkdb.beginTransaction();
-            Cursor cur = bkdb.rawQuery("select author, link1, link2, votes from book where bookname = ?;",new String[]{selectedBook});
-            while (cur.moveToNext()){
+            Cursor cur = bkdb.rawQuery("select author, link1, link2, votes from book where bookname = ?;", new String[]{selectedBook});
+            while (cur.moveToNext()) {
                 String auth = cur.getString(0);
                 String amazon = cur.getString(1);
                 String goodreads = cur.getString(2);

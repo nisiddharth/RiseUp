@@ -32,12 +32,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class VideosActivity extends AppCompatActivity {
+    private final static int TOP_EMOTION = 0;
     ActivityVideosBinding binding;
     private List<YoutubeVideo> data;
     private SharedPrefs prefs;
     private ArrayList<EmotionData> topFourEmotionsList;
     private String emotion = null;
-    private final static int TOP_EMOTION = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class VideosActivity extends AppCompatActivity {
             topFourEmotionsList = (ArrayList<EmotionData>)
                     fromEmotionDetectBundle.getSerializable("topFourEmotions");
             emotion = topFourEmotionsList.get(TOP_EMOTION).getEmotion();
-            Log.e("Emotion for video",emotion);
+            Log.e("Emotion for video", emotion);
         } else {
             Toast.makeText(this, "Cannot display graph results", Toast.LENGTH_LONG).show();
             // Log.d("EmotionResultActivity",getString(R.string.null_result_bundles));
@@ -61,17 +61,17 @@ public class VideosActivity extends AppCompatActivity {
         loadData();
     }
 
-    void toggleProgress(){
+    void toggleProgress() {
 
     }
 
-    private void loadData(){
+    private void loadData() {
         toggleProgress();
         RetrofitClient.getClient().getVideos(prefs.getToken(), emotion).enqueue(new Callback<GetVideoResponse>() {
             @Override
             public void onResponse(Call<GetVideoResponse> call, Response<GetVideoResponse> response) {
                 toggleProgress();
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
 
                 }
                 data = response.body().getVideos();
@@ -85,20 +85,26 @@ public class VideosActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpRecyclerView(){
+    private void setUpRecyclerView() {
         binding.videoRecycler.setLayoutManager(new LinearLayoutManager(this));
         VideoRecyclerAdapter adapter = new VideoRecyclerAdapter();
         binding.videoRecycler.setAdapter(adapter);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
-    private class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdapter.ViewHolder>{
+    }
+
+    private class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdapter.ViewHolder> {
         RecyclerVideoBinding binding;
         Context context = VideosActivity.this;
+
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            binding = RecyclerVideoBinding.inflate(getLayoutInflater(), parent,false);
+            binding = RecyclerVideoBinding.inflate(getLayoutInflater(), parent, false);
             return new ViewHolder(binding.getRoot());
         }
 
@@ -110,7 +116,7 @@ public class VideosActivity extends AppCompatActivity {
                 @Override
                 public void onReady(YouTubePlayer youTubePlayer) {
                     super.onReady(youTubePlayer);
-                    youTubePlayer.loadVideo(video.getVideoId(),0);
+                    youTubePlayer.loadVideo(video.getVideoId(), 0);
                 }
             });
             holder.title.setText(video.getTitle());
@@ -122,9 +128,10 @@ public class VideosActivity extends AppCompatActivity {
             return data.size();
         }
 
-        private class ViewHolder extends RecyclerView.ViewHolder{
+        private class ViewHolder extends RecyclerView.ViewHolder {
             YouTubePlayerView youTubePlayerView;
             TextView channel, title;
+
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
                 youTubePlayerView = binding.youtubePlayerView;
@@ -132,11 +139,5 @@ public class VideosActivity extends AppCompatActivity {
                 title = binding.title;
             }
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
     }
 }

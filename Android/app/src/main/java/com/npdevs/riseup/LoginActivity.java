@@ -1,18 +1,14 @@
 package com.npdevs.riseup;
 
-import androidx.appcompat.app.AppCompatActivity;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.gson.Gson;
 import com.npdevs.riseup.api.responseModels.auth.SignInResponse;
-import com.npdevs.riseup.api.responseModels.auth.SignUpResponse;
 import com.npdevs.riseup.api.retrofit.RetrofitClient;
 import com.npdevs.riseup.databinding.ActivityLoginBinding;
 import com.npdevs.riseup.utils.SharedPrefs;
@@ -20,9 +16,14 @@ import com.npdevs.riseup.utils.SharedPrefs;
 import java.util.HashMap;
 import java.util.Map;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
     SharedPrefs prefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<SignInResponse> call, Response<SignInResponse> response) {
                 toggleProgress();
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     Gson gson = new Gson();
                     SignInResponse errorResponse = gson.fromJson(response.errorBody().charStream(), SignInResponse.class);
                     Toast.makeText(LoginActivity.this, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
@@ -69,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 //Saving token in shared preferences
-                prefs.saveToken("Bearer "+response.body().getToken());
+                prefs.saveToken("Bearer " + response.body().getToken());
 
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(i);

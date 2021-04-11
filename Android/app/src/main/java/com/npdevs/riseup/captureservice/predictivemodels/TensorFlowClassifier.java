@@ -65,7 +65,7 @@ public class TensorFlowClassifier implements Classifier {
         c.inputSize = inputSize;
 
         // Pre-allocate buffer.
-        c.outputNames = new String[] { outputName };
+        c.outputNames = new String[]{outputName};
 
         c.outputName = outputName;
         c.output = new float[numClasses];
@@ -90,7 +90,7 @@ public class TensorFlowClassifier implements Classifier {
 
         //probabilities
         if (feedKeepProb) {
-            tfHelper.feed("keep_prob", new float[] { 1 });
+            tfHelper.feed("keep_prob", new float[]{1});
         }
         //get the possible outputs
         tfHelper.run(outputNames);
