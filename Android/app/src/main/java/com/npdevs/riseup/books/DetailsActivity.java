@@ -33,6 +33,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         ActionBar toolbar = getSupportActionBar();
         toolbar.setTitle("Book details");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         bkname = findViewById(R.id.bkname);
         authornm = findViewById(R.id.authnm);
@@ -91,5 +92,11 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 }

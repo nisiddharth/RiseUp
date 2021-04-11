@@ -203,8 +203,11 @@ public class EmotionResultActivity extends AppCompatActivity {
                 break;
 
         }
-
     }
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
+    }
 }

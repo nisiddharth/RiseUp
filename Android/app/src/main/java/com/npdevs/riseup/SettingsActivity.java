@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,9 +23,9 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySettingsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Settings");
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         prefs = new SharedPrefs(this);
 
@@ -54,5 +55,11 @@ public class SettingsActivity extends AppCompatActivity {
         startActivity(i);
 
         new SessionCtrl(this).onLogout();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 }

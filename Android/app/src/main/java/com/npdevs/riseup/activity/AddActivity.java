@@ -18,6 +18,7 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Add activity");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Button addBtn = findViewById(R.id.button);
         RadioGroup group = findViewById(R.id.radioGrp);
@@ -35,5 +36,11 @@ public class AddActivity extends AppCompatActivity {
             databaseActivityHelper.insertData(editText.getText().toString(), type);
             finish();
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 }

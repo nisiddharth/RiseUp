@@ -42,6 +42,8 @@ public class BookActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Books");
 
         Bundle extras = getIntent().getExtras();
         Log.e("ashu12_chi", extras.toString());
@@ -230,5 +232,11 @@ public class BookActivity extends AppCompatActivity {
         dataSets.add(emotion3Set);
 
         return dataSets;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 }

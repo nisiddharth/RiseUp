@@ -40,6 +40,8 @@ public class RequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRequestBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Requests");
         prefs = new SharedPrefs(this);
 
         binding.swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -162,5 +164,11 @@ public class RequestActivity extends AppCompatActivity {
                 progressBar = binding.progress;
             }
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 }

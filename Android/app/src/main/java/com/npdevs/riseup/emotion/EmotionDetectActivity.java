@@ -326,9 +326,13 @@ public class EmotionDetectActivity extends AppCompatActivity {
 
                 }
             }
-
         }
+    }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 
 }

@@ -44,6 +44,8 @@ public class VideosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityVideosBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Videos");
         prefs = new SharedPrefs(this);
 
         Bundle extras = getIntent().getExtras();
@@ -139,5 +141,11 @@ public class VideosActivity extends AppCompatActivity {
                 title = binding.title;
             }
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 }

@@ -61,6 +61,8 @@ public class ProfileActivity extends AppCompatActivity implements OnChartValueSe
         super.onCreate(savedInstanceState);
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Friend Summary");
         friendId = getIntent().getStringExtra("id");
         friendName = getIntent().getStringExtra("name");
 
@@ -279,5 +281,11 @@ public class ProfileActivity extends AppCompatActivity implements OnChartValueSe
         // undo all highlights
         chart.highlightValues(null);
         chart.invalidate();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 }

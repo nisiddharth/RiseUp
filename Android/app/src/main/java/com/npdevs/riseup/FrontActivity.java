@@ -29,9 +29,9 @@ public class FrontActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_front);
-
         ActionBar toolbar = getSupportActionBar();
         toolbar.setElevation(0);
+        toolbar.setHomeAsUpIndicator(null);
 
         getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         tabLayout = findViewById(R.id.tablayout1);

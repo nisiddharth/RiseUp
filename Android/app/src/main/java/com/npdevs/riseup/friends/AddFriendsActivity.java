@@ -30,6 +30,7 @@ public class AddFriendsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Add Friends");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         prefs = new SharedPrefs(this);
 
         binding.addFriend.setOnClickListener(new View.OnClickListener() {
@@ -69,5 +70,11 @@ public class AddFriendsActivity extends AppCompatActivity {
             binding.progressBar.setVisibility(View.INVISIBLE);
         else
             binding.progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 }

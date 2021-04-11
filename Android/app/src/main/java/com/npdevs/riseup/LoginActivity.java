@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
@@ -30,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         prefs = new SharedPrefs(this);
+        ActionBar toolbar = getSupportActionBar();
+        toolbar.setHomeAsUpIndicator(null);
 
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                 prefs.saveToken("Bearer " + response.body().getToken());
 
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
                 Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
             }
