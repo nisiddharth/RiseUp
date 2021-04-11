@@ -213,7 +213,7 @@ public class ProfileActivity extends AppCompatActivity implements OnChartValueSe
 
     private SpannableString generateCenterSpannableText() {
 
-        SpannableString s = new SpannableString("Your moods today");
+        SpannableString s = new SpannableString("Their moods today");
         s.setSpan(new RelativeSizeSpan(1.7f), 0, 16, 0);
         return s;
     }
