@@ -216,6 +216,7 @@ public class EmotionDetectActivity extends AppCompatActivity {
         toResults.putExtra("emotionResultsBundle", bundleToEmotionResults);
 
         this.startActivity(toResults);
+        finish();
     }
 
     private ArrayList<EmotionData> orderedEmotionsToMap(Emotion emotion) {
