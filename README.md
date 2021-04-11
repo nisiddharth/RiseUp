@@ -7,6 +7,8 @@ Project demo: https://youtu.be/c-G0YSk0DRY
 
 Project PPT: https://drive.google.com/file/d/1UCwItTfZOhbqsxN8JDjEchLGa-uAsL76/view?usp=sharing
 
+Get APK from: https://github.com/ashu12chi/RiseUp/releases/tag/1.0
+
 
 ## Introduction:
 This is a self care app that primarily focusses on reducing the stress levels of the user. This app identifies the mood of the user and suggests relative measures in the form of music, videos, books and hobbies to calm down the user and also prompts the trusted contacts in times of distress. This app shall be beneficial for people with depression, anxiety and panic attacks since it also offers access to registered medical professionals when user needs one.
