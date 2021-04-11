@@ -66,7 +66,7 @@ public class EmotionResultActivity extends AppCompatActivity {
             chart.getXAxis().setDrawAxisLine(false);
             chart.getXAxis().setDrawGridLines(false);
             chart.getXAxis().setDrawLabels(false);
-            chart.getXAxis().setTextColor(Color.WHITE);
+            chart.getXAxis().setTextColor(Color.BLACK);
             chart.getXAxis().setDrawLimitLinesBehindData(false);
             chart.getAxisLeft().setDrawAxisLine(false);
             chart.getAxisLeft().setDrawGridLines(false);
@@ -75,7 +75,7 @@ public class EmotionResultActivity extends AppCompatActivity {
             chart.getAxisLeft().setDrawZeroLine(false);
 
             chart.getAxisRight().setDrawLabels(false);
-            chart.getLegend().setTextColor(Color.WHITE);
+            chart.getLegend().setTextColor(Color.BLACK);
 
             chart.setDrawGridBackground(false);
             chart.setPinchZoom(false);

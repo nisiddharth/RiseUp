@@ -98,18 +98,6 @@
                     android:text="Next ➝" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/summarytextpast"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/switches"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:text="Your friend is doing good"
-                android:textAlignment="center"
-                android:textColor="@color/dark_green"
-                android:textStyle="bold" />
-
         </RelativeLayout>
     </ScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
