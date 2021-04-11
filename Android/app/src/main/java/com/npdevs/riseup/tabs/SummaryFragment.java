@@ -195,7 +195,7 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
         l.setYOffset(0f);
 
         // entry label styling
-        chart.setEntryLabelColor(Color.WHITE);
+        chart.setEntryLabelColor(Color.BLACK);
         chart.setEntryLabelTextSize(12f);
         setData(chart, emotions);
     }
@@ -246,7 +246,7 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
 
         PieDataSet dataSet = new PieDataSet(entries, "Moods");
 
-        dataSet.setDrawIcons(false);
+        dataSet.setDrawIcons(true);
 
         dataSet.setSliceSpace(3f);
         dataSet.setIconsOffset(new MPPointF(0, 40));
@@ -279,7 +279,7 @@ public class SummaryFragment extends Fragment implements OnChartValueSelectedLis
         PieData data = new PieData(dataSet);
         data.setValueFormatter(new PercentFormatter());
         data.setValueTextSize(11f);
-        data.setValueTextColor(Color.WHITE);
+        data.setValueTextColor(Color.BLACK);
         chart.setData(data);
         // undo all highlights
         chart.highlightValues(null);
